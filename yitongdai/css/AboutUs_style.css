@@ -1,0 +1,479 @@
+body,
+h1,
+h2,
+p,
+dd{
+	margin: 0;
+}
+ul,
+dl{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+img{
+	vertical-align: top;
+	border: none;
+}
+.clearFix:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+
+.wrap{
+	width: 1000px;
+	margin: 0 auto;
+}
+#header {
+	height: 40px;
+	background: #3f3a39;
+}
+
+#header .attention {
+	float: left;
+ 	font: 12px/38px "宋体";
+ 	padding-top: 2px;
+ 	color: #999999;
+ }
+ 
+#header #headerNav {
+	float: left;
+}
+#header #headerNav a{
+	display: inline-block;
+	vertical-align: top;
+}
+#header #headerNav a:hover{
+	color: #1c87ca;
+}
+#header #headerNav .weibo{
+	transition: 0.2s;
+	float: left;
+	margin-top: 9px;
+	margin-left: 15px;
+	width: 26px;
+	height: 20px;
+	background: url(../img/css.png) no-repeat 0 0;
+}
+#header #headerNav .weibo:hover{
+	background: url(../img/css.png) no-repeat 0 -25px;
+}
+
+#header #headerNav .wechat{
+	transition: 0.2s;
+	float: left;
+	margin-top: 10px;
+	margin-left: 14px;
+	width: 26px;
+	height: 20px;
+	background: url(../img/css.png) no-repeat -30px 0;
+}
+#header #headerNav .wechat:hover{
+	background: url(../img/css.png) no-repeat -30px -25px;
+}
+
+#header #headerNav .App {
+	float: left;
+	position: relative;
+	margin-left: 22px;
+	padding-top: 2px;
+	padding-left: 21px;
+	font: 14px/38px arial,"宋体";
+	color: #d0ecd0;
+}
+#header #headerNav .App:hover:before{
+	background: url(../img/css.png) no-repeat -60px -25px;
+}
+#header #headerNav .App:before{
+	content: "";
+	position: absolute;
+	left: 0px;
+	top: 8px;
+	width: 12px;
+	height: 22px;
+	background: url(../img/css.png) no-repeat -60px 0;
+}
+#header #headerNav .Wap {
+	float: left;
+	margin-top: 8px;
+	margin-left: 15px;
+	height: 24px;
+	font: 14px/24px arial,"宋体";
+	padding: 0 5px;
+	background: #ffffff;
+	color: #3f3a39;
+	border-radius: 6px;
+}
+#header #headerNav .Wap:hover{
+	background: #1c87ca;
+	color: #ffffff;
+}
+#header #headerNav .online {
+	float: left;
+	position: relative;
+	padding-top: 2px;
+	padding-left: 42px;
+	font: 14px/38px "宋体";
+	color: #e1e0bf;
+}
+#header #headerNav .online:before{
+	content: "";
+	position: absolute;
+	left: 19px;
+	top: 10px;
+	width: 18px;
+	height: 19px;
+	background: url(../img/css.png) no-repeat -90px 0;
+}
+#header #headerNav .online:hover:before{
+	background: url(../img/css.png) no-repeat -90px -25px;
+}
+
+
+
+
+#header .enter {
+	float: right;	
+}
+#header .enter span{
+	vertical-align: middle;
+	padding-left: 3px;
+	padding-right: 4px;
+	font: 15px "宋体";
+	color: #c0e0ec;
+}
+#header .enter a{
+	font: 12px/38px "宋体";
+	color: #ececec;
+}
+#header .enter a:hover{
+	color: #1c87ca;
+}
+
+
+#nav {
+	background: #f8f8f8;
+}
+#nav #h1{
+	float: left;
+	padding: 5px 24px 7px 0;
+}
+#nav #h1 .log{
+	display: block;
+	width: 299px;
+	height: 64px;
+	background: url(../img/css.png) no-repeat 0 -55px;
+}
+#nav .navA{
+	float: left;
+	font: 18px/28px "宋体";
+	color: #555555;
+	padding: 25px 12px 23px;
+}
+#nav .navA2{
+	float: left;
+	font: 18px/28px "宋体";
+	color: #1c87ca;
+	padding: 25px 12px 23px;
+}
+#nav .navA:hover{
+	color: #1c87ca;
+}
+
+
+#divBg{
+	width: 100%;
+	height: 20px;
+	background: #2ea7e0;
+	margin-bottom: 30px;
+}
+
+#contentBox{
+	background: #f8f8f8;
+	padding-bottom: 87px;
+}
+#content{
+	border-left: 3px solid #2ea7e0 ;
+	border-bottom: 2px solid #b1b1b1;
+	border-right: 1px solid #e0e0e0;
+	background: #ffffff;
+}
+#contentLeft{
+	float: left;
+	width: 135px;
+}
+#contentLeft .text1{
+	font: 16px/60px "微软雅黑";
+	text-align: center;
+	color: #fff;
+	background: #2ea7e0;
+}
+#contentLeft .text{
+	font: 16px/60px "微软雅黑";
+	text-align: center;
+	color: #555555;
+}
+#contentLeft .text:hover{
+	background: #2ea7e0;
+	color: #ffffff;
+}
+#contentRight{
+	float: left;
+	width: 860px;
+	
+	
+	padding-bottom: 259px;
+	border-left: 1px solid #e0e0e0;
+}
+#contentRight h2{
+	margin-left: -1px;
+	font: 24px/70px "微软雅黑";
+	color: #ffffff;
+	padding-right: 18px;
+	text-align: right;
+	background: url(../img/divRightBg.png) no-repeat ;
+}
+#contentRight .introduce{
+	height: 1673px;
+	font: 16px/28px "微软雅黑";
+	color: #555;
+	padding: 58px 17px 40px 35px;
+}
+#contentRight .introduce strong{
+	font-family: "microsoft yahei";
+}
+#contentRight .introduce .text{
+	text-indent: 2em;
+	padding-bottom: 27px;
+}
+#contentRight .introduce .text1{
+}
+#contentRight .introduce .text3{
+	text-indent: 2em;
+}
+#contentRight .introduce .log{
+	text-align: center;
+}
+#contentRight .introduce .log img{
+	vertical-align: middle;
+}
+#contentRight .introduce span {
+	display:inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+
+
+
+
+#footer {
+	background: #3f3a39;
+	padding-bottom: 35px;
+}
+#footer .about,
+.law, 
+.help {
+	margin-top: 20px;
+	float: left;
+	width: 170px;
+}
+#footer a{
+	color: #ececec;
+}
+#footer a:hover{
+	color: #1c87ca;
+}
+#footer .about dt,
+.law dt,
+.help dt,
+.service dt{
+	position: relative;
+	font: 14px/34px "微软雅黑";
+	text-indent: 30px;
+}
+#footer .about dt:before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: 7px;
+	left: 5px;
+	width: 18px;
+	height: 16px;
+	background: url(../img/css.png) no-repeat -199px -122px;
+}
+#footer .law dt:before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: 6px;
+	left: 1px;
+	width: 14px;
+	height: 16px;
+	background: url(../img/css.png) no-repeat -226px -122px;
+}
+#footer .help dt:before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: 6px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	background: url(../img/css.png) no-repeat -249px -122px;
+}
+#footer .about dd,
+.law dd,
+.help dd{
+	position: relative;
+	font: 12px/24px "微软雅黑";
+	text-indent: 18px;
+}
+#footer .about dd:before,
+.law dd:before,
+.help dd:before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: 10px;
+	left: 7px;
+	width: 4px;
+	height: 4px;
+	background: url(../img/css.png) no-repeat -389px 0;
+}
+#footer .service {
+	margin-top: 20px;
+	float: left;
+	width: 194px;
+}
+#footer .service .number{
+	font: 18px/34px "微软雅黑";
+	color: #ececec;
+	padding-bottom: 2px;
+}
+#footer .service dt{
+	position: relative;
+	color: #b2b0a4;
+}
+#footer .service dt:before{
+	content: "";
+	position: absolute;
+	top: 4px;
+	left: 1px;
+	width: 14px;
+	height: 20px;
+	background: url(../img/css.png) no-repeat -275px -122px;
+}
+#footer .service dd{
+	font: 12px/24px "微软雅黑";
+	color: #b2b0b0;
+}
+#footer .company{
+	float: left;
+	margin-top: 21px;
+	width: 290px;
+	font: 12px/24px "微软雅黑";
+	color: #b2b0b0;
+}
+#footer .company a{
+	color: #b2b0b0;
+}
+#footer .company a:hover{
+	color: #327dca;
+}
+#footer .company dt{
+	position: relative;
+	text-indent: 24px;
+}
+#footer .company dt:before{
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 1px;
+	width: 16px;
+	height: 16px;
+	background: url(../img/css.png) no-repeat -199px -151px;
+}
+#footer .company .dlImg{
+	position: relative;
+	display: block;
+	text-indent: 25px;
+}
+#footer .company .dlImg:before{
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 1px;
+	width: 18px;
+	height: 20px;
+	background: url(../img/css.png) no-repeat -226px -151px;
+}
+#last {
+	width: 1034px;
+	margin: 25px auto 43px;
+}
+#last a{
+	float: left;
+	/*float: right;*/
+}
+#last .lastImg1{
+	display: block;
+	width: 98px;
+	height: 36px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat 0 0;
+}
+#last .lastImg2{
+	display: block;
+	width: 99px;
+	height: 35px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat -100px 0;
+}
+#last .lastImg3{
+	display: block;
+	width: 178px;
+	height: 36px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat 0 -40px;
+}
+#last .lastImg4{
+	display: block;
+	width: 96px;
+	height: 36px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat 0 -82px;
+}
+#last .lastImg5{
+	display: block;
+	width: 102px;
+	height: 36px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat -98px -82px;
+}
+#last .lastImg6{
+	display: block;
+	width: 74px;
+	height: 35px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat 0 -123px;
+}
+#last .lastImg7{
+	display: block;
+	width: 90px;
+	height: 36px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat -89px -123px;
+}
+#last .lastImg8{
+	display: block;
+	width: 150px;
+	height: 36px;
+	margin: 0 9px;
+	background: url(../img/last_css.png) no-repeat 0 -167px;
+}
