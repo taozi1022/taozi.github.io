@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+<script>
+var scale = 1;
+if(window.devicePixelRatio){
+	scale = scale / window.devicePixelRatio;
+}
+document.write('<meta name="viewport" content="initial-scale='+scale+',minimum-scale='+scale+',maximum-scale='+scale+',user-scalable=no" />');
+</script>
+	<title>魅族手机主页</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+<script>
+toSize ();
+function toSize () {
+	var html = document.getElementsByTagName("html")[0];
+	var screenW = html.getBoundingClientRect().width; 
+	html.style.fontSize = screenW/16 + "px";
+}
+window.addEventListener(
+	"orientationchange",
+	function(){
+		toSize ();
+	},
+	false
+);
+window.addEventListener(
+	"resize",
+	function(){
+		toSize ();
+	},
+	false
+);
+</script>
+</head>
+<body>
+	<div id="header">
+		<a href="#" class="img"><img src="image/banner.png"></a>
+		<span class="spot">
+			<a href="#"></a><a href="#"></a><a href="#" class="show"></a><a href="#"></a><a href="#"></a>
+		</span>
+		<a href="#" class="iconRight"></a>
+		<a href="#" class="iconLeft"></a>
+	</div>
+	<section id="new">
+		<a href="#"><img src="image/1.png"></a>
+		<a href="#"><img src="image/2.png"></a>
+		<a href="#"><img src="image/3.png"></a>
+	</section>
+	<section id="iphone">
+		<h2><a href="#">魅蓝手机</a></h2>
+		<a href="#"><img src="image/4.png"></a>
+		<a href="#"><img src="image/4.png"></a>
+		<a href="#"><img src="image/4.png"></a>
+		<a href="#"><img src="image/4.png"></a>
+		<a href="#"><img src="image/4.png"></a>
+	</section>
+	<section id="parts">
+		<h2><a href="#">智能硬件/配件</a></h2>
+		<ul class="clear">
+			<li>
+				<a href="#"><img src="image/5.png"></a>
+				<a href="#" class="Router">路由器</a>
+				<p>￥99</p>
+			</li>
+			<li>
+				<a href="#"><img src="image/5.png"></a>
+				<a href="#" class="Router">路由器</a>
+				<p>￥99</p>
+			</li>
+			<li>
+				<a href="#"><img src="image/5.png"></a>
+				<a href="#" class="Router">路由器</a>
+				<p>￥99</p>
+			</li>
+			<li>
+				<a href="#"><img src="image/5.png"></a>
+				<a href="#" class="Router">路由器</a>
+				<p>￥99</p>
+			</li>
+		</ul>
+	</section>
+	<section id="move">
+		<h2><a href="#">品牌动态</a></h2>
+		<ul class="brand">
+			<li>
+				<span class="news">新闻</span><a href="#" class="text">魅族携梦想合伙人 挑战颜值加速<span class="word">度</span></a>
+			</li>
+            <li>
+				<span class="news">新闻</span><a href="#" class="text">魅族携梦想合伙人 挑战颜值加速<span class="word">度</span></a>
+			</li>
+			<li>
+				<span class="news">新闻</span><a href="#" class="text">魅族携梦想合伙人 挑战颜值加速<span class="word last">度</span></a>
+			</li>
+		</ul>
+	</section>
+	<footer id="footer">
+	    <div  class="else clear">
+		<a href="#">魅族商城</a>
+		<a href="#">魅族商城</a>
+		<a href="#">魅族商城</a>
+		<a href="#">魅族商城</a>
+		</div>
+		<ul class="serve clear">
+			<li>
+				<a href="#">
+					<img src="image/6.png">
+					<p>魅族手机意外保</p>
+				</a>
+			</li> 
+			<li>
+				<a href="#">
+					<img src="image/7.png">
+					<p>百城速达真「快」递</p>
+				</a>
+			</li> 
+		</ul>
+		<div class="attention">
+			<h3>关注我们</h3>
+			<ul class="symbol clear">
+				<li><a href="#"><img src="image/8.png"></a></li>
+				<li><a href="#"><img src="image/8.png"></a></li>
+				<li><a href="#"><img src="image/8.png"></a></li>
+				<li><a href="#"><img src="image/8.png"></a></li>
+			</ul>
+		</div>
+		<nav class="nav clear">
+			<a href="#">电脑版</a>
+			<a href="#">魅族社区</a>
+			<a href="#" class="china">中国</a>
+		</nav>
+		<p class="finish">2016
+		<a href="#">All rights reserved</a>
+		</p>
+	</footer>
+	<a href="Top"></a>
+</body>
+</html>
