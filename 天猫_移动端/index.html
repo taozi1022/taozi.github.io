@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>天猫商场</title>
+		<link rel="stylesheet" href="css/index_style.css" />
+		<script>
+			var scale = 1;
+			if(window.devicePixelRatio){
+				scale = scale / window.devicePixelRatio;
+			}
+			document.write('<meta name="viewport" content="initial-scale='+scale+',minimum-scale='+scale+',maximum-scale='+scale+',user-scalable=no" />');
+		</script>
+		<script>
+			toSize ();
+			function toSize () {
+				var html = document.getElementsByTagName("html")[0];
+				var screenW = html.getBoundingClientRect().width; 
+				html.style.fontSize = screenW/18 + "px";
+			}
+			window.addEventListener(
+				"orientationchange",
+				function(){
+					//横竖屏切换之后，会执行这里边的代码
+					toSize ();
+				},
+				false
+			);
+			window.addEventListener(
+				"resize",
+				function(){
+					//横竖屏切换之后，会执行这里边的代码
+					toSize ();
+				},
+				false
+			);
+			/*
+				1rem = 页面宽度 18分之1
+			  
+			*/
+		</script>
+	</head>
+	<body>
+		<header id="header">
+			<a href="#" class="menuBtn"></a>
+		    <div class="search">
+		    	<input type="text" value="搜索商品/店铺" />
+		    	<a href="#" class="searchSubmit"></a>
+		    </div>
+		    <a href="#" class="account"></a>
+		</header>
+		<section id="content">
+			<div id="banner">
+				<a href="#">
+					<img src="img/banner.png"/>
+				</a>
+			</div>
+			<nav id="nav" class="clearFix">
+				<a href="#" class="navList">
+					<span class="indent"></span>
+					<span class="text">我的订单</span>
+				</a>
+				<a href="#" class="navList2">
+					<span class="indent2"></span>
+					<span class="text">购物车</span>
+				</a>
+				<a href="#" class="navList">
+					<span class="indent indent3Bg"></span>
+					<span class="text">天猫超市</span>
+				</a>
+				<a href="#" class="navList">
+					<span class="indent indent4Bg"></span>
+					<span class="text">天猫国际</span>
+				</a>
+			</nav>
+			<div id="buy" class="clearFix">
+				<a href="#">
+					<img class="buyImg" src="img/buying.png"/>
+				</a>
+				<div class="buyList">
+					<a href="#" class="list1"></a>
+					<a href="#" class="list2"></a>
+				</div>
+			</div>
+			<p id="buyLast">[<span>天猫</span>热点]</p>
+			<!--精彩活动-->
+			<div id="active">
+				<h2 class="title">精彩活动</h2>
+				<div class="activeImg clearFix">
+					<a href="#" class="activeLeft"></a>
+					<a href="#" class="activeRight"></a>
+				</div>
+			</div>
+			<!--精彩活动结束-->
+			
+			
+			<!--精选市场-->
+			<div id="market">
+				<h2 class="title">精选市场</h2>
+				<div class="clearFix">
+					<a href="#" class="marketLeft"></a>
+					<div class="marketRight">
+						<a href="#" class="img1"></a>
+						<a href="#" class="img2"></a>
+					</div>
+				</div>
+			</div>
+			<!--精选市场结束-->
+			
+			<!--两行导航-->
+			<nav id="textNav" class="clearFix">
+				<a href="#" class="text">t恤女</a>|<a href="#" class="text">连衣裙</a>|<a href="#" class="text">衬衫女</a>|<a href="#" class="text">时尚套装女</a><a href="#" class="text">牛仔裤女</a>|<a href="#" class="text">雪纺衫</a>|<a href="#" class="text">真丝连衣裙</a>|<a href="#" class="text">牛仔短裤女</a>
+			</nav>
+			<!--两行导航结束-->
+			<div id="banner2">
+				<a href="#">
+					<img src="img/banner2.png"/>
+				</a>
+			</div>
+			<!--热门市场-->
+			<div id="market2">
+				<h2 class="title">精选市场</h2>
+				<ul class="markerList clearFix">
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">男装大牌</span>
+							<span class="line2">白搭衣橱</span>
+							<span class="market2img1"></span>
+							<!--<img src="img/market2Img.png"/>-->
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">电器城</span>
+							<span class="line2">抢稀缺手机</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img2"></span>
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">美食</span>
+							<span class="line2">天天0元试吃</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img3"></span>
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">母婴玩具</span>
+							<span class="line2">萌宝必备</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img4"></span>
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">家纺家饰</span>
+							<span class="line2">梦想之屋</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img5"></span>
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">天猫家装</span>
+							<span class="line2">三年质保</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img6"></span>
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">内衣</span>
+							<span class="line2">更爱内在美</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img7"></span>
+						</a>
+					</li>
+					<li class="markertext">
+						<a href="#">
+							<span class="line1">运动户外</span>
+							<span class="line2">明星限量款</span>
+							<!--<img src="img/market2Img.png"/>-->
+							<span class="market2img8"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--热门市场结束-->
+			
+			<!--猜你喜欢-->
+			<div id="like">
+				<header class="title">
+					<span class="border"></span>
+					<h2 class="titleText">猜你喜欢</h2>
+				</header>
+				<ul class="likeList clearFix">
+					<li class="listImg">
+						<a href="#">
+							<img src="img/likeImg.png"/>
+							<span class="text">[热销]姐妹爱套装女2016夏季新款时尚休闲三件套</span>
+							<span class="price">￥138.0</span>
+						</a>
+					</li>
+					<li class="listImg">
+						<a href="#">
+							<img src="img/likeImg2.png"/>
+							<span class="text">[热销]姐妹爱套装女2016夏季新款时尚休闲三件套</span>
+							<span class="price">￥138.0</span>
+						</a>
+					</li>
+					<li class="listImg">
+						<a href="#">
+							<img src="img/likeImg3.png"/>
+							<span class="text">[热销]姐妹爱套装女2016夏季新款时尚休闲三件套</span>
+							<span class="price">￥138.0</span>
+						</a>
+					</li>
+					<li class="listImg">
+						<a href="#">
+							<img src="img/likeImg4.png"/>
+							<span class="text">[热销]姐妹爱套装女2016夏季新款时尚休闲三件套</span>
+							<span class="price">￥138.0</span>
+						</a>
+					</li>
+					<li class="listImg">
+						<a href="#">
+							<img src="img/likeImg.png"/>
+							<span class="text">[热销]姐妹爱套装女2016夏季新款时尚休闲三件套</span>
+							<span class="price">￥138.0</span>
+						</a>
+					</li>
+					<li class="listImg">
+						<a href="#">
+							<img src="img/likeImg2.png"/>
+							<span class="text">[热销]姐妹爱套装女2016夏季新款时尚休闲三件套</span>
+							<span class="price">￥138.0</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--猜你喜欢结束-->
+		</section>
+		
+	</body>
+</html>

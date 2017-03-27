@@ -1,0 +1,447 @@
+body{
+	width: 18rem;
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+}
+input{
+	padding: 0;
+	border: none;
+}
+a{
+	text-decoration: none;
+}
+img{
+	border: none;
+	vertical-align: top;
+}
+ul,
+p,
+h2{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.clearFix:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+
+
+
+
+
+
+
+
+
+#header{
+	position: relative;
+	height: 2.26rem;
+	background: #21d3a5;
+}
+#header .menuBtn{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 2.03333rem;
+	height: 2.25rem;
+	background: url(../img/css.png) no-repeat 1rem 0.6rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#header .search{
+	position: absolute;
+	left: 3.05rem;
+	top: 0.3rem;
+}
+#header .search input{
+	width: 11.9rem;
+	height: 1.65rem;
+	font: 0.66667rem/1.65rem "宋体";
+	color: #9ca6a5;
+	border-radius: 0.1rem;
+}
+#header .searchSubmit{
+	position: absolute;
+	top: 0;
+	right:0;
+	width: 1.433rem;
+	height: 1.65rem;
+	background: url(../img/css.png) no-repeat -1.08333rem 0.35rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#header .account{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 2.06667rem;
+	height: 2.25rem;
+	background: url(../img/css.png) no-repeat -2.61667rem 0.45rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+
+#content{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 2.25rem;
+	overflow: auto;
+}
+#banner{
+	width:18rem;
+	height: 6.45rem;
+	vertical-align: top;
+}
+#banner img{
+	width:18rem;
+	height: 6.45rem;
+}
+
+
+
+#nav {
+	height: 1.35rem;
+	padding: 0.3rem 0.48333rem 0.18333rem 0.5rem;
+}
+#nav .text{
+	display: block;
+	width: 2.73333rem;
+	font: 0.63333rem/1.6667rem "宋体";
+	color: #001829;
+}
+#nav .text .navImg{
+	display: inline-block;
+	width: 1.6rem;
+	height: 1.6rem;
+	margin: 0.3rem 0.56667rem 0;
+	background: url(../img/css.png) no-repeat 0 -1.7667rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+
+
+
+
+
+
+#nav .navList{
+	float: left;
+	width: 2.75rem;
+	padding: 0 0.75rem;
+}
+#nav .navList2{
+	float: left;
+	width: 2.05rem;
+	padding: 0 1.1rem;
+}
+#nav .indent{
+	display: block;
+	height: 1.6rem;
+	margin: 0 0.56667rem;
+	background: url(../img/css.png) no-repeat 0 -1.7667rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#nav .indent3Bg{
+	background: url(../img/css.png) no-repeat 0 -5.48333rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#nav .indent4Bg{
+	background: url(../img/css.png) no-repeat 0 -7.21667rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#nav .navList2 .indent2{
+	display: block;
+	height: 1.6rem;
+	margin: 0 0.233333rem;
+	background: url(../img/css.png) no-repeat 0 -3.6rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+
+
+
+
+/*淘抢购*/
+#buy .buyImg{
+	float: left;
+	width: 8.4rem;
+	height: 10.05rem;
+	border-top: 0.05rem solid #f7f7f7;
+	border-bottom: 0.05rem solid #f7f7f7;
+}
+#buy .buyList{
+	float: left;
+}
+#buy .buyList .list1{
+	display: block;
+	width: 9.5rem;
+	height: 5rem;
+	border:  0.05rem solid #f7f7f7;
+	border-bottom: none;
+	background: url(../img/buyList1.png) no-repeat;
+	background-size: 9.5rem 5rem;
+}
+#buy .buyList .list2{
+	display: block;
+	width: 9.5rem;
+	height: 5rem;
+	border:  0.05rem solid #f7f7f7;
+	background: url(../img/buyList2.png) no-repeat;
+	background-size: 9.5rem 5rem;
+}
+#buyLast{
+	font: bold 0.766667rem/1.95rem "宋体";
+	color: #de2421;
+	border-bottom: 0.45rem solid #f7f7f7;
+}
+#buyLast span{
+	color: #000000;
+}
+/*淘抢购结束*/
+
+
+/*精彩活动*/
+#active .title{
+	height: 1.8333333rem;
+	font: bold 0.766667rem/1.8333333rem "宋体";
+	color: #313031;
+	text-indent: 0.43333333rem;
+	padding-bottom: 0.1666667rem;
+	background: url(../img/css.png) no-repeat -2.2rem -1.3833333rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#active .activeLeft{
+	float: left;
+	display: block;
+	width: 8.95rem;
+	height: 5.65rem;
+	background: url(../img/activeLeft.png) no-repeat;
+	background-size: 8.95rem 5.65rem;
+}
+#active .activeRight{
+	float: right;
+	display: block;
+	width: 8.95rem;
+	height: 5.65rem;
+	background: url(../img/activeRight.png) no-repeat;
+	background-size: 8.95rem 5.65rem;
+}
+/*精彩活动结束*/
+
+/*精选市场*/
+#market .title{
+	height: 1.8333333rem;
+	font: bold 0.766667rem/1.8333333rem "宋体";
+	color: #313031;
+	text-indent: 0.43333333rem;
+	padding-bottom: 0.1166667rem;
+	background: url(../img/css.png) no-repeat -2.2rem -1.3833333rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#market .marketLeft{
+	float: left;
+	width: 8.4rem;
+	height: 10.05rem;
+	border-top: 0.05rem solid #f7f7f7;
+	border-bottom: 0.05rem solid #f7f7f7;
+	background: url(../img/marketLeft.png) no-repeat;
+	background-size: 8.4rem 10.05rem;
+}
+#market .marketRight{
+	float: left;
+}
+#market .marketRight .img1{
+	display: block;
+	width: 9.5rem;
+	height: 5rem;
+	border:  0.05rem solid #f7f7f7;
+	border-bottom: none;
+	background: url(../img/markeRight1.png) no-repeat;
+	background-size: 9.5rem 5rem;
+}
+#market .marketRight .img2{
+	display: block;
+	width: 9.5rem;
+	height: 5rem;
+	border:  0.05rem solid #f7f7f7;
+	background: url(../img/markeRight2.png) no-repeat;
+	background-size: 9.5rem 5rem;
+}
+
+
+
+/*精选市场结束*/
+
+
+#textNav{
+	padding: 0.483333rem 0 0.6166667rem 0;
+	font: 0.75rem "宋体";
+}
+#textNav .text{
+	display: inline-block;
+	width: 4rem;
+	font: 0.6333333rem/1.6rem arial,"宋体";
+	color: #001829;
+	text-align: center;
+}
+
+
+
+#banner2 img{
+	width: 18rem;
+	height: 4.5rem;
+}
+
+
+/*热门市场*/
+#market2 .title{
+	height: 1.8333333rem;
+	font: bold 0.766667rem/1.8333333rem "宋体";
+	color: #313031;
+	text-indent: 0.43333333rem;
+	padding-bottom: 0.1166667rem;
+	border-bottom: 0.05rem solid #f7f7f7;
+	background: url(../img/css.png) no-repeat -2.2rem -1.3833333rem;
+	background-size: 3.65rem 8.81666667rem;
+}
+#market2 .markertext{
+	float: left;
+	width: 4.5rem;
+	padding-top: 0.3rem;
+	padding-bottom: 0.2666667rem;
+	
+}
+#market2 .markertext .market2img1{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img2{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat -5.5rem 0;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img3{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat 0 -5.3166667rem;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img4{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat -5.5rem  -5.3166667rem;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img5{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat  0 -10.63333333rem;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img6{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat  -5.5rem  -10.63333333rem;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img7{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat  0 -16.05rem;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .market2img8{
+	display: block;
+	width: 4.5rem;
+	height: 4.8rem;
+	background: url(../img/css2.png) no-repeat  -5.5rem  -16.05rem;
+	background-size: 10rem 20.85rem;
+}
+#market2 .markertext .line1{
+	display: block;
+	font: bold 0.73333rem/1rem "宋体";
+	color: #001829;
+	padding: 0.55rem;
+}
+#market2 .markertext .line2{
+	font: 0.566667rem/0.833333rem "宋体";
+	color: #bdbabd;
+	padding: 0.55rem;
+}
+
+
+
+
+
+/*热门市场结束*/
+
+
+#like{
+	background: #f7f7f7;
+}
+#like .title{
+	height: 2.15rem;
+	position: relative;
+	
+	
+}
+#like .title .border{
+	position: absolute;
+	left: 6.7rem;
+	top: 0.93333rem;
+	display: block;
+	width: 4.6rem;
+	height: 0;
+	border: 0.033333rem solid #9c9a9c;
+}
+#like .title .titleText{
+	position: absolute;
+	left: 7.45rem;
+	top: 0;
+	width: 3.1rem;
+	text-align: center;
+	font: 0.6666667rem/1.96666667rem "宋体";
+	color: #9c9a9c;
+	background: #f7f7f7;
+}
+#like .listImg{
+	float: left;
+	width: 8.85rem;
+	margin-right: 0.05rem;
+	margin-bottom: 0.15rem;
+	background: #ffffff;
+}
+#like .listImg img{
+	width: 8.85rem;
+	height: 8.85rem;
+	margin-top: 0.05rem;
+	margin-bottom: 0.55rem;
+	
+}
+#like .listImg .text{
+	display: block;
+	width: 7.63333rem;
+	margin-left: 0.45rem;
+	margin-bottom: 0.56666667rem;
+	font: 0.66667rem/1 "宋体";
+	color: #636563;
+}
+#like .likeList .price{
+	display: block;
+	font: 0.6rem/1 arial;
+	color: #de2421;
+	margin-left: 0.45rem;
+	margin-bottom: 0.4rem;
+}
