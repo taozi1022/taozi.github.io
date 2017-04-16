@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>HTML5纸带翻转动画DEMO演示</title>
+
+
+  <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+<!-- <div style="text-align:center;clear:both">
+</div> -->
+<h2 id="msg" class="msg">Move the mouse around</h2>
+<div id="cont" class="cont">
+  <!-- <div class="fold"></div>
+  <div class="fold"></div>
+  <div class="fold"></div>
+  <div class="fold"></div> -->
+  <p class="fold" style="animation-delay: 0.05"></p>
+</div>
+
+  <script src="js/jquery.js"></script>
+  <script>
+
+    /*生成50个div放到cont容器中*/
+    var a = 0.05;
+    var str = '';
+    for(var i = 0; i < 50; i++){
+        str += '<p class="fold" style="animation-delay: '+a+'s"></p>';
+        a += 0.05;
+    }
+    $("#cont").html(str);
+
+    document.addEventListener('mousemove', updRotation, false);
+
+    function updRotation(e){
+        console.log( e.x / 15)
+        $("#msg").css("opacity",0);
+        $("#cont").css("transform","rotateY(" + e.x / 10 + "deg) rotateZ(-" + e.y / 10 + "deg)")
+    }
+   
+  </script>
+
+</body>
+
+</html>
