@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>sidebar demo</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <div id="sidebar">
+    	<ul>
+    		<li id="user" class="item">
+    			<span class="glyphicon glyphicon-user"></span>
+    			<p>我</p>
+    		</li>
+    		<li id="assets" class="item">
+    			<span class="glyphicon glyphicon-usd"></span>
+    			<p>资产</p>
+    		</li>
+    		<li id="brand" class="item">
+    			<span class="glyphicon glyphicon-heart"></span>
+    			<p>品牌</p>
+    		</li>
+    		<li id="others" class="item">
+    			<span class="glyphicon glyphicon-tree-conifer"></span>
+    			<p>其它</p>
+    		</li>
+    	</ul>
+
+    	<div id="closeBar">
+    		<span class="glyphicon glyphicon-remove"></span>
+    	</div>
+    </div>
+    <!-- 内容项 -->
+    <div class="nav-content" id="user-content">
+    	<div class="nav-close">
+    		<span class="glyphicon glyphicon-chevron-left"></span>
+    	</div>
+    	<h3></h3>
+    </div>
+    <div class="nav-content" id="assets-content">
+    	<div class="nav-close">
+    		<span class="glyphicon glyphicon-chevron-left"></span>
+    	</div>
+    	<h3></h3>
+    </div>
+    <div class="nav-content" id="brand-content">
+    	<div class="nav-close">
+    		<span class="glyphicon glyphicon-chevron-left"></span>
+    	</div>
+    	<h3></h3>
+    </div>
+    <div class="nav-content" id="others-content">
+    	<div class="nav-close">
+    		<span class="glyphicon glyphicon-chevron-left"></span>
+    	</div>
+    	<h3></h3>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+    	$("#closeBar").sidebar(this,$("#sidebar"));	//关闭
+    </script>
+</body>
+</html>
