@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选项卡</title>
+<style type="text/css">
+	.red{
+		background: red;
+	}
+	div{
+		width: 100px;
+		height: 100px;
+		font-size: 30px;
+		display: none;
+	}
+</style>
+</head>
+<body>
+    <input class="red" type="button" value="btn1" />
+	<input type="button" value="btn1" />
+	<input type="button" value="btn1" />
+	<div style="display: block;">1</div>
+	<div>2</div>
+	<div>3</div>
+</body>
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+	$("input:button").click(function (){
+		//this指向的是触发事件的 元素
+		//console.log( this );
+		//包装成jQ对象
+		$("input:button").removeClass("red");
+		$(this).addClass("red");
+
+		$("div").hide();
+		//指定的div显示出来
+		$("div").eq($(this).index()).show();
+
+	});	
+
+
+</script>
+</html>

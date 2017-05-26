@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<body>
+    <a href="example.html" hreflang="en-a">Some text</a> 
+	<a href="example.html" hreflang="en-UK">Some other text</a>
+	<a href="example.html" hreflang="english">will not be outlined</a>
+</body>
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+	$('a[hreflang|="en"]').css('border','3px solid green');
+</script>
+</html>
