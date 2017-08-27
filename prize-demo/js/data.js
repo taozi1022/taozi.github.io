@@ -19,8 +19,8 @@ var apiModule = {
             dataType: "text",
             async:true ,
             success:function(result) {
-                var _result = result || {} ;
-                if(callback){ callback(_result)}
+                var _result = eval("("+result+")") || {} ;
+                if(callback){ callback(_result.data)}
             },
             error:function(result){
                 var _result = result || {} ;

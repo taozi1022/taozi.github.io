@@ -42,7 +42,7 @@
                 //当前用户的信息
                 nickname:"WX2",
                 headimage:"http://wx.qlogo.cn/mmopen/Q3auHgzwzM46TsQsB1a7aL2eGiaicexiavzR6VEQgvOiaEyqLefVlXZyrGtZ3t7psIEjLu9Nq2S0rn8aQbvkX1LyWws29nyeh6QvIq2dia17Zzaw/" ,
-                wxid: "WX2" ,
+                wxid: "WX1" ,
                 //目标用户的信息
                 towxid:"WX1",
                 tonickname : "leo",
@@ -64,13 +64,13 @@
 		</header>
 		<ul id="oul"></ul>
 		<p id="opportunity" class="opportunity"></p>
-        <!--<div class="button-box">
+        <div class="button-box">
             <img src="./img/energy.png" alt="">
             <img src="./img/luck-draw.png" alt="">
-        </div>-->
-        <div class="button-box btn-share">
-            <img src="./img/btn-share.png" alt="">
         </div>
+        <!--<div class="button-box btn-share">
+            <img src="./img/btn-share.png" alt="">
+        </div>-->
 
         <div class="winning-record">
 			<ul id="winning-record-list">
@@ -126,7 +126,6 @@
 	<script>
 		<!--数据初始化-->
 		$('#userName').html(USER.nickname) ;
-		$('#opportunity').html(USER.choujiang_count) ;
 	</script>
 	<script type="text/javascript">
 
@@ -135,13 +134,18 @@
          * 这是一个示例，比如查询总榜
          */
         $(function () {
-            apiModule.zongbang(false ,function (res) {
+            /*apiModule.zongbang(false ,function (res) {
                 console.log(res)
-            })
+            })*/
             apiModule.user(false ,function (res) {
                 console.log(res)
+                USER.headimage = res.headimage;
+                USER.nickname = res.nickname;
+console.log(res.choujiang_count)
+                $('#opportunity').html(res.choujiang_count) ;
+
             });
-            apiModule.zhuli(false ,function (res) {
+            /*apiModule.zhuli(false ,function (res) {
                 console.log(res)
             });
             apiModule.jiangpinByWxid(false ,function (res) {
@@ -149,7 +153,7 @@
             })
             apiModule.fenxiang(false ,function (res) {
                 console.log(res)
-            })
+            })*/
 
 
         });
@@ -381,6 +385,14 @@
 		window.onload = function(){
 		    lottery.init('oul');
 		    $("#oul a").click(function(){
+		        //判断当前用户不等于目标用户，不能进行抽奖
+                if(USER.wxid != USER.towxid){
+                    alert('no')
+                    return;
+                }
+
+
+
 		        if (click) {//click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
 		            return false;
 		        }else{
