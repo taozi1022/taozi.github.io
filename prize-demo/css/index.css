@@ -19,6 +19,8 @@ header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.p
 .button-box{margin:14px auto;width:322px}
 .button-box img{width:118px}
 .button-box img:last-child{margin-left:80px}
+.btn-share{width:118px;}
+.btn-share img:last-child{margin-left: 0;}
 .winning-record{margin-bottom:26px;padding-top:44px;height:300px;background:url(../img/winning-record.png) no-repeat center 6px,url(../img/record-bg.png) no-repeat center 30px;background-size:162px auto,318px auto}
 #winning-record-list{overflow:scroll;margin:0 auto;width:288px;max-height:260px}
 #winning-record-list li{padding-top:12px;height:38px;border-bottom:1px solid #ac8a65;color:#99322b;font-size:18px}
@@ -32,3 +34,15 @@ header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.p
 .information>input.mobile{top:37px}
 .information>input.place{top:60px}
 #enroll{position:absolute;top:123px;left:108px;width:158px;height:38px}
+
+
+.gray {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+
+    filter: grayscale(100%);
+
+    filter: gray;
+}

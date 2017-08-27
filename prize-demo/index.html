@@ -64,9 +64,12 @@
 		</header>
 		<ul id="oul"></ul>
 		<p id="opportunity" class="opportunity"></p>
-        <div class="button-box">
+        <!--<div class="button-box">
             <img src="./img/energy.png" alt="">
             <img src="./img/luck-draw.png" alt="">
+        </div>-->
+        <div class="button-box btn-share">
+            <img src="./img/btn-share.png" alt="">
         </div>
 
         <div class="winning-record">
@@ -142,6 +145,9 @@
                 console.log(res)
             });
             apiModule.jiangpinByWxid(false ,function (res) {
+                console.log(res)
+            })
+            apiModule.fenxiang(false ,function (res) {
                 console.log(res)
             })
 
