@@ -86,9 +86,9 @@
 		<p id="my-winning-record"></p>
 		<p class="draw-instructions"></p>
 		<div class="information">
-			<input id="name" class="name" type="text" value="姓名 ">
-			<input class="mobile" type="tel" value="1234567890" >
-			<input class='place' type="text" value="北京市海淀区 ">
+			<input id="name" class="name" type="text" value="">
+			<input class="mobile" type="tel" value="">
+			<input class='place' type="text" value="">
 			<p id="enroll"></p>
 		</div>
 	</div>
@@ -338,6 +338,18 @@
                     mobile: $('.mobile').val(),
                     place: $('.place').val()
 				}
+				if(!personInfo.name){
+		            alert('请填写姓名');
+		            return;
+				}
+                if(!personInfo.mobile){
+                    alert('请填写手机号');
+                    return;
+                }
+                if(!personInfo.place){
+                    alert('请填写校区');
+                    return;
+                }
 		        console.log(personInfo)
 				alert('报名成功')
             });
