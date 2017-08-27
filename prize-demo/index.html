@@ -37,6 +37,22 @@
                 iszhuli : '<?php echo $iszhuli ; ?>',
                 iscare : '<?php echo $iscare ; ?>',
             };
+
+            window.USER = {
+                //当前用户的信息
+                nickname:"WX2",
+                headimage:"http://wx.qlogo.cn/mmopen/Q3auHgzwzM46TsQsB1a7aL2eGiaicexiavzR6VEQgvOiaEyqLefVlXZyrGtZ3t7psIEjLu9Nq2S0rn8aQbvkX1LyWws29nyeh6QvIq2dia17Zzaw/" ,
+                wxid: "WX2" ,
+                //目标用户的信息
+                towxid:"WX1",
+                tonickname : "leo",
+                toheadimage : "<?php echo $toheadimage ; ?>",
+                //        抽奖次数 ，是否分享，是否助力，是否关注
+                choujiang_count : '99',
+                isshare : '<?php echo $isshare ; ?>',
+                iszhuli : '<?php echo $iszhuli ; ?>',
+                iscare : '<?php echo $iscare ; ?>',
+            };
 	</script>
 </head>
 <body>
@@ -106,10 +122,42 @@
     <script src="./js/data.js"></script>
 	<script>
 		<!--数据初始化-->
-		$('#userName').html(data.userName) ;
-		$('#opportunity').html(data.opportunity) ;
+		$('#userName').html(USER.nickname) ;
+		$('#opportunity').html(USER.choujiang_count) ;
 	</script>
 	<script type="text/javascript">
+
+
+        /**
+         * 这是一个示例，比如查询总榜
+         */
+        $(function () {
+            apiModule.zongbang(false ,function (res) {
+                console.log(res)
+            })
+            apiModule.user(false ,function (res) {
+                console.log(res)
+            });
+            apiModule.zhuli(false ,function (res) {
+                console.log(res)
+            });
+            apiModule.jiangpinByWxid(false ,function (res) {
+                console.log(res)
+            })
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
         //奖品设置
         var arr = [{
                 nowIndex:'0',
@@ -155,7 +203,7 @@
                     li.className = 'clearFix';
                     for(var i = 0; i < 3; i++){
                         if(n == 1 && i == 1){
-                            html += '<a class="lottery-item begin"><img src="img/prize/9.jpg"></a>';
+                            html += '<a href="#" class="lottery-item begin"><img src="img/prize/9.jpg"></a>';
                             m--;
                         }else{
                             html+= '<div class="lottery-item lottery-item-'+arr[m].nowIndex+'"><img src="img/prize/'+arr[m].showCont+'.jpg"><p class="mask"></p></div>';
@@ -212,7 +260,7 @@
 		function roll(){
 		    lottery.times += 1;
 		    lottery.roll();//转动过程调用的是lottery的roll方法，这里是第一次调用初始化
-		    if (lottery.times > lottery.cycle+10 && lottery.prize==lottery.index) {
+		    if (lottery.times > lottery.cycle+15 && k-1 == lottery.index) {
 		        clearTimeout(lottery.timer);
 		        setTimeout(function(prizeindex){
                     confirm({
@@ -229,7 +277,7 @@
                             alert('向好友炫耀')
                         }
                     })
-                },700,lottery.prize)
+                },700,k-1)
                 lottery.prize=-1;
 		        lottery.times=0;
 		        click=false;
@@ -253,6 +301,7 @@
 		    }
 		    return false;
 		};
+
         function confirm (param){
             var componentsAlert = document.getElementById("componentsAlert") || false ;
             //if(!param ){componentsAlert.style={display : "none"}}
@@ -320,47 +369,42 @@
             }
         };
 
-		var click=false;
 
-		window.onload=function(){
+		var click=false, k ;
+
+		window.onload = function(){
 		    lottery.init('oul');
 		    $("#oul a").click(function(){
 		        if (click) {//click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
 		            return false;
 		        }else{
-                    if(data.opportunity == 0){
+                    if(USER.choujiang_count == 0){
                         alert('没有抽奖机会了！');
                         return;
                     }
-                    data.opportunity--;
-                    $('#opportunity').html(data.opportunity) ;
+                    //获取中奖的奖品
+                    apiModule.choujiang(false, function (res) {
+                        k = res;
+                    })
+                    //当前机会-1
+                    USER.choujiang_count--;
+                    $('#opportunity').html(USER.choujiang_count) ;
                     lottery.speed=100;
-		            roll();    //转圈过程不响应click事件，会将click置为false
+		            roll(k);    //转圈过程不响应click事件，会将click置为false
 		            click=true; //一次抽奖完成后，设置click为true，可继续抽奖
 		            return false;
 		        }
 		    });
 
 		    $('#enroll').click(function(){
-		        var personInfo = {
-		            name: $('.name').val(),
-                    mobile: $('.mobile').val(),
-                    place: $('.place').val()
-				}
-				if(!personInfo.name){
-		            alert('请填写姓名');
-		            return;
-				}
-                if(!personInfo.mobile){
-                    alert('请填写手机号');
-                    return;
-                }
-                if(!personInfo.place){
-                    alert('请填写校区');
-                    return;
-                }
-		        console.log(personInfo)
-				alert('报名成功')
+                window.USER.mobile = $('.mobile').val();
+                window.USER.school= $('.place').val();
+                window.USER.name = $('.name').val();
+
+                apiModule.addinfo(false ,function (res) {
+                    console.log(res)
+                })
+
             });
 		};
 	</script>

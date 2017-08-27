@@ -7,6 +7,29 @@
 var host = "http://lingmaojia.cn/h5/shuxichoujiang"
 var apiModule = {
     ///*帮助他*/
+    user : function  (param,callback){
+        param = param ||  {
+            wxid :window.USER.wxid,
+            towxid :window.USER.towxid,
+        }
+        $.ajax( {
+            url :host+ "/api/?f=user" ,
+            data :param ,
+            type : "POST" ,
+            dataType: "text",
+            async:true ,
+            success:function(result) {
+                var _result = result || {} ;
+                if(callback){ callback(_result)}
+            },
+            error:function(result){
+                var _result = result || {} ;
+                if(callback){ callback(_result)}
+            }
+        } )
+
+    },
+    ///*帮助他*/
     zhuli : function  (param,callback){
         param = param ||  {
             wxid :window.USER.wxid,
@@ -16,7 +39,7 @@ var apiModule = {
             url :host+ "/api/?f=zhuli" ,
             data :param ,
             type : "POST" ,
-            dataType: "json",
+            dataType: "text",
             async:true ,
             success:function(result) {
                 var _result = result || {} ;
@@ -31,22 +54,20 @@ var apiModule = {
     },
     ///*抽奖*/
     choujiang: function  (param,callback){
-
         param = param ||  {
             wxid :window.USER.wxid,
             nickname:window.USER.nickname
         }
 
-        $.ajax( {
+        $.ajax({
             url : host+"/api/?f=choujiang" ,
             data :param,
             type : "POST" ,
-            dataType : "json" ,
+            dataType : "text" ,
             async:true ,
             success:function(result) {
-                var _result = result || {} ;
-                if(callback){ callback(_result)}
-
+                var _result = eval("("+result+")") || {} ;
+                if(callback){ callback(_result.data)}
             },
             error:function(result){
                 console.log("shibai")
@@ -55,8 +76,8 @@ var apiModule = {
 
 
     },
-    ///*抽奖*/
-    choujiang: function  (param,callback){
+    ///*分享*/
+    fenxiang: function  (param,callback){
         param = param ||  {
             wxid :window.USER.wxid
         }
@@ -64,7 +85,7 @@ var apiModule = {
             url : host+"/api/?f=wxshare" ,
             data :param,
             type : "POST" ,
-            dataType : "json" ,
+            dataType : "text" ,
             async:true ,
             success:function(result) {
                 var _result = result || {} ;
@@ -87,7 +108,7 @@ var apiModule = {
             url : host+"/api/?f=addinfo" ,
             data :param,
             type : "POST" ,
-            dataType : "json" ,
+            dataType : "text" ,
             async:true ,
             success:function(result) {
 
@@ -108,7 +129,7 @@ var apiModule = {
             url : host+"/api/?f=zongbang" ,
             data :param,
             type : "POST" ,
-            dataType : "json" ,
+            dataType : "text" ,
             async:true ,
             success:function(result) {
                 var _result = result || {} ;
@@ -129,7 +150,7 @@ var apiModule = {
             url : host+"/api/?f=jiangpinByWxid" ,
             data :param,
             type : "POST" ,
-            dataType : "json" ,
+            dataType : "text" ,
             async:true ,
             success:function(result) {
                 var _result = result || {} ;
