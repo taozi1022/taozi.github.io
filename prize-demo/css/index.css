@@ -1,0 +1,133 @@
+/*---reset---*/
+body,p{margin:0;}
+ul,li{padding:0;margin:0; list-style: none;}
+img{vertical-align: top;}
+button{ padding:0; border:none;}
+input{
+    border:none;
+    padding:0;
+    background: none;
+    color: #fff;
+    line-height:22px;
+}
+.clearFix::after{
+    display: block;content: '';clear: both;}
+/*---reset end---*/
+
+
+#oul {width:286px;height:282px;margin:152px auto 0; padding:28px 0;}
+#oul>li{width:100%;  margin-bottom:12px;}
+li .lottery-item{position: relative;width:84px;height:84px;float:left;   margin-left: 7px; }
+li .lottery-item img{width:100%;height:auto;border-radius: 5px;}
+.mask{ width:100%;  height:100%;  position:absolute;  left:0;  top:0;  background-color: rgba(252,211,4,0.5);  display:none;  }
+#oul div.active .mask {display:block;}
+.winning-record,.draw-instructions{text-align: center;}
+
+.htmleaf-container{ background: url("../img/bg.png") no-repeat;background-size: 375px auto;}
+
+header{ height:72px; padding-left: 3px;
+    padding-top:2px; background: url("../img/logo.png") no-repeat 184px center;  background-size: 170px auto}
+#userHead{
+    width:62px;
+    height:62px;
+    background: pink;
+    border-radius:50%;
+    float: left;
+}
+#userName{
+    float: left;
+    margin-left:8px;
+    padding-top:24px;
+    color: #fff;
+    font-size:14px;
+}
+
+
+
+
+
+.opportunity{text-align: center;  color: #fff;ont-size: 16px;  margin-top: 14px;}
+.button-box{width:322px;margin:14px auto;}
+.button-box img{width:118px;}
+.button-box img:last-child{margin-left:80px;}
+
+/*中奖记录*/
+.winning-record{
+    height:300px;
+    background: url("../img/winning-record.png") no-repeat center 6px, url("../img/record-bg.png") no-repeat center 30px;
+    background-size:162px auto, 318px auto;
+    padding-top:44px;
+    margin-bottom: 26px;
+}
+#winning-record-list{
+    width:288px;
+    max-height: 260px;
+    overflow: scroll;
+    margin:0 auto;
+}
+#winning-record-list li{
+    padding-top:12px;
+    height:38px;
+    font-size:18px;
+    color: #99322b;
+    border-bottom:1px solid #ac8a65;
+}
+#winning-record-list li>span{
+    display:inline-block;
+    width:33.3%;
+    margin-top:10px;
+}
+#winning-record-list li>span:first-child{
+    width:34px;
+    height:34px;
+    background: #000;
+    float: left;
+    margin-left:4px;
+    margin-top:0;
+}
+#my-winning-record{
+    margin:0 auto;
+    width:158px;
+    height:38px;
+    background: url("../img/my-winning-record.png") no-repeat center top;
+    background-size: 158px auto;
+}
+
+.draw-instructions{
+    margin:0 auto;
+    height: 330px;
+    background: url("../img/draw-instructions.png") no-repeat center top;
+    background-size:340px auto;
+    margin-top: 100px;
+}
+.information{
+    position: relative;
+    width:100%;
+    height:242px;
+    color: #fff;
+    font-size:14px;
+    background: url("../img/person-info.png") no-repeat 46px 16px, url("../img/info.png") no-repeat center 124px;
+    -webkit-background-size:  303px auto, 160px auto;
+    background-size: 303px auto, 160px auto;
+}
+.information>input{
+    position: absolute;
+    left:90px;
+}
+.information>input.name{
+    top:13px;
+}
+.information>input.mobile{
+    top:37px;
+}
+.information>input.place{
+    top:60px;
+}
+
+#enroll{
+    width: 158px;
+    height: 38px;
+    position: absolute;
+    top: 123px;
+    left: 108px;
+}
