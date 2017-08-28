@@ -1,0 +1,428 @@
+﻿<?php
+require_once "./api/jssdk.php";
+$jssdk = new JSSDK("wx8c8af29e6074df3a", "2e0414462ed616a55f06344bd7a7914e");
+$signPackage = $jssdk->GetSignPackage();
+?>
+<?php
+    $WXnickname = $WXheadimgurl = $WXoppenid = "test" ;
+	/**
+	 测试数据
+	 $WXnickname = "WXtest" ;
+	 $WXheadimgurl = "http://wx.qlogo.cn/mmopen/Q3auHgzwzM46TsQsB1a7aL2eGiaicexiavzR6VEQgvOiaEyqLefVlXZyrGtZ3t7psIEjLu9Nq2S0rn8aQbvkX1LyWws29nyeh6QvIq2dia17Zzaw/" ;
+	 $WXoppenid = "wxopidtest1212" ;*/
+
+	 @require_once "./api/GetUserInfo.php";
+     $nickname = $WXnickname ;
+     $headimage = $WXheadimgurl ;
+     $wxid= $WXoppenid ;
+     $source= 0 ;
+     $iscare = 0 ;
+     $iszhuli = 0 ;
+     $tonickname = $nickname;
+     $toheadimage = $headimage ;
+     $towxid = $wxid;
+     $tosource = $source ;
+	 $discount = "200" ;
+     $toid = "" ;
+     $tel = "" ;
+ 	 $url = "" ;
+     if( empty( $_GET["towxid"] )  ){
+
+     	$url =  'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+  		if(strpos($url,"?") > 0){
+        $url =$url."&towxid=$wxid";
+        }else{
+        $url =$url."?towxid=$wxid";
+        }
+
+        header("Location:$url");
+        exit;
+        }else{
+
+        $towxid = $_GET["towxid"] ;
+        @require_once "./api/dbs/show.php";
+
+        }
+        if($tel == 2){
+        if($towxid == $wxid){
+            echo '<img src="http://lingmaojia.oss-cn-beijing.aliyuncs.com/custum/feng.jpg" style="width:100%;">';
+        exit;
+        }else{
+        if(strpos($url,"?") > 0){
+        $url =$url."&towxid=$wxid";
+        }else{
+        $url =$url."?towxid=$wxid";
+        }
+        header("Location:$url");
+        exit;
+        }
+        }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>一抢到底</title>
+<meta name="viewport"  content="width=device-width,user-scalable=no">
+<link rel="stylesheet" rev="stylesheet" href="../../style/index.css" type="text/css" />
+</head>
+<body class="backmall">
+<!-- id=innerbox 标签外面 不放任何标签  为自适应标签   -->
+<div class="" id="innerbox"> 
+    <div class="inner">
+       <div class="top">
+       	<div class="home_top"><a ><img src="" alt=""></a></div>
+       	<div class="names"></div>
+       	<!-- logo -->
+       	<div class="logo"><h1><img src="images/logo.png" alt=""></h1></div>
+       	<div class="cl"></div>
+       </div>
+
+       <div class="banner"><img src="images/ban1.jpg" alt=""></div>
+
+       <div class="times" id="times">
+       	<!--<em>47</em>-->
+       	<!--<strong>:</strong>-->
+       	<!--<em>59</em>-->
+       	<!--<strong>:</strong>-->
+       	<!--<em>59</em>-->
+       </div>
+
+       <div class="ban_main">
+       		<div class="main_box">
+       			<div class="main_ul mian_ulx1">
+       				<ul>
+       					<li class="lx1"><p>购卡类型</p></li>
+       					<li class="lx2"><p>赠送</p></li>
+       					<li class="lx3"><p>总金额（含卡送）</p></li>
+       				</ul>
+       				<div class="cl"></div>
+       			</div>
+       			<div class="main_ul mian_ulx2 mian_ulx2_1">
+       				<ul>
+       					<li class="lx1">
+       						<p>闪电卡</p>
+       						<p>18000</p>
+       					</li>
+       					<li class="lx2 min_p">
+       						<p>0元</p>
+       					</li>
+       					<li class="lx3 min_p">
+       						<p>0元</p>
+       					</li>
+       				</ul>
+       				<div class="cl"></div>
+       			</div>
+       			<div class="main_ul mian_ulx2 mian_ulx2_2">
+       				<ul>
+       					<li class="lx1">
+       						<p>金卡</p>
+       						<p>38000</p>
+       					</li>
+       					<li class="lx2 min_p">
+       						<p>0元</p>
+       					</li>
+       					<li class="lx3 min_p">
+       						<p>0元</p>
+       					</li>
+       				</ul>
+       				<div class="cl"></div>
+       			</div>
+       			<div class="main_ul mian_ulx2 mian_ulx2_3">
+       				<ul>
+       					<li class="lx1">
+       						<p>钻石卡</p>
+       						<p>68000</p>
+       					</li>
+       					<li class="lx2 min_p">
+       						<p>0元</p>
+       					</li>
+       					<li class="lx3 min_p">
+       						<p>0元</p>
+       					</li>
+       				</ul>
+       				<div class="cl"></div>
+       			</div>
+       		</div>
+       </div>
+
+       <div class="times times_2">
+       	<p>本活动已有180人参加</p>
+       </div>
+		
+		<div class="banmst">
+			<div class="h20"></div>
+			<div class="huodomll   huodomll-2 ">
+				<ul>
+					<li class="mglx btn-bangta" ontouchstart = "zhuli(1)"><a >帮他抢</a></li>
+					<li class="mglx btn-canjia"  ontouchstart = "zhuli(2)"><a>我也要参加</a></li>
+					<li class="mglx btn-yaoqing"><a>邀请朋友帮忙</a></li>
+				</ul>
+				<div class="cl"></div>
+			</div>
+			<div class="biao">
+				<span><img src="images/sw1.png" alt=""></span>
+				<span><img src="images/sw1.png" alt=""></span>
+				<div class="cl"></div>
+			</div>
+
+			<div class="huodmall"><img src="images/px1.png" alt=""></div>
+		</div>
+
+		<div class="paconetr"><h2>排行榜</h2></div>
+
+		<div class="lastban">
+			<div class="myscent">
+				<span class="cur1" ontouchstart = "paihang(1)" >我的排行</span>
+				<span class="cur2" ontouchstart = "paihang(2)">总排行</span>
+			</div>
+
+			<div class="info">
+				<div class="info_main">
+					<ul id="my-paihangbang" class="my-paihangbang">
+
+					</ul>
+
+					<ul id="zong-paihangbang" class="zong-paihangbang">
+                            <li>
+							<div class="pic fl"><img src="images/lx1.jpg" alt=""></div>
+							<div class="text fl">
+								<p>某某某</p>
+								<p><span>2017.5.17</span><span>14:29</span></p>
+							</div>
+							<div class="text text_2 fr">
+								<p>123 <em>元</em></p>
+							</div>
+							<div class="cl"></div>
+						</li>
+
+
+					</ul>
+				</div>
+
+			</div>
+
+			<!-- 微信 -->
+
+			<div class="lastpic"><img src="images/wx1.jpg" alt=""></div>
+
+		<!-- 版权 -->
+			<div class="footer">
+				<h2>预约试听电话：400-8300-819</h2>
+				<p>本活动最终解释权归</p>
+				<p>深圳市书戏教育科技发展有限公司<br>所有</p>
+				<p>官网：http://www.book-play.cn</p>
+			</div>
+		</div>
+    </div>
+</div>
+<div class="tankuang">
+	<div class="info ">
+		<img src="./images/tankuang.png" >
+		<span class="btn" ontouchstart = "tankuangHide()" ></span>
+		<span  class="fen" ></span>
+		<span class="btn-yaoqing"  ></span>
+
+	</div>
+</div>
+<div class="fidinfo"></div>
+
+</body>
+
+<script type="text/javascript" src="../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../script/global.js"></script>
+<script>
+	var USER = {
+		nickname:"<?php echo $nickname ; ?>",
+		headimage:"<?php echo $headimage ; ?>",
+		wxid: "<?php echo $wxid ; ?>",
+		towxid:"<?php echo $towxid ; ?>",
+		toid:"<?php echo $toid ; ?>",
+		tonickname : "<?php echo $tonickname ; ?>",
+		toheadimage : "<?php echo $toheadimage ; ?>",
+		tosource : parseInt( "<?php echo $tosource ; ?>" ),
+		source : "<?php echo $source ; ?>",
+		iskan : '<?php echo $iszhuli ; ?>',
+		iscare : '<?php echo $iscare ; ?>',
+		price : 68000,
+		discount:(parseFloat( '<?php echo $discount ; ?>') * Math.random() ).toFixed(1) ,
+		getIskan:[]
+	};
+
+	if(USER.tosource > USER.price ){
+		USER.tosource = USER.price ;
+	}
+
+
+
+
+</script>
+
+<script>
+	var priceType = [
+			18000,
+			38000,
+			68000
+	]
+
+
+	window.onload=function(){
+		//1496534399 = 2017年06月03日23:59
+		ShowCountDown(2017,6,4,'times');
+		setTouxinag();
+		setJiage(0);
+		setBtn();
+		getIskan();
+		$(".fidinfo").fadeOut();
+	}
+	function ShowCountDown(year,month,day,divname)
+	{
+		var now = new Date();
+		var endDate = new Date(year, month-1, day);
+		var leftTime=endDate.getTime()-now.getTime();
+		var leftsecond = parseInt(leftTime/1000);
+		var day1=Math.floor(leftsecond/(60*60*24));
+		var hour=Math.floor((leftsecond-day1*24*60*60)/3600);
+		var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
+		var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
+		var cc = document.getElementById(divname);
+		cc.innerHTML = "<span>活动剩余时间</span> <em>"+day1+"天"+hour+"小时"+minute+"分"+second+"秒</em>";
+		var interval = 1000;
+		window.setTimeout(function(){ShowCountDown(year,month,day,divname);}, interval);
+
+	}
+	function setTouxinag(){
+		$(".inner .names").text(USER.tonickname)
+		$(".inner .home_top img").attr("src",USER.toheadimage )
+	}
+	function paihang(n){
+		if(n==1){
+			$(".zong-paihangbang").hide();
+			$(".my-paihangbang").show();
+		}else{
+			$(".my-paihangbang").hide();
+			$(".zong-paihangbang").show();
+		}
+	}
+	function tankuangHide(){
+		$(".tankuang").hide();
+	}
+	function zhuli(n){
+		switch (n){
+			//帮助他
+			case 1 :
+				setJiage( USER.discount  );
+				$(".huodomll").removeClass("huodomll-2").removeClass("huodomll-1").addClass("huodomll-3");
+				$(".tankuang .info .fen").text(USER.discount);
+				$(".tankuang").show();
+				break;
+			//我要参加
+			case 2 :
+			    //自己进入并且未注册
+                if (USER.wxid == USER.towxid && USER.toid == "") {
+                    ///*数据提交到后台 c存储当前用户*/
+                    $.post("api/dbs/in.php", {
+                        fun: "user",
+                        name: "",
+                        tel: "",
+                        nickname: USER.nickname,
+                        headimage: USER.headimage,
+                        wxid: USER.wxid,
+                        source: 0,
+                    }, function(result) {
+                        console.log(result)
+                    });
+
+                }
+
+				USER.discount = Math.random()*200 + 100 ;
+				USER.towxid = USER.wxid ;
+				USER.tonickname = USER.nickname;
+				USER.toheadimage = USER.headimage;
+				setTouxinag();
+				setJiage( USER.discount );
+				$(".huodomll").removeClass("huodomll-2").removeClass("huodomll-3").addClass("huodomll-1");
+				break;
+		}
+
+		/*数据提交到后台*/
+		$.post("api/dbs/in.php", {
+			fun: "notes",
+			nickname: USER.nickname,
+			headimage: USER.headimage,
+			wxid: USER.wxid,
+			source: USER.discount,
+			towxid: USER.towxid
+		}, function(result) {});
+	}
+
+    function setBtn(){
+        if( USER.towxid == USER.wxid && USER.iskan==0 ){
+            $(".huodomll").removeClass("huodomll-2").removeClass("huodomll-1").addClass("huodomll-3");
+        }else if( USER.towxid == USER.wxid && USER.iskan>0 ){
+			$(".huodomll").removeClass("huodomll-2").removeClass("huodomll-3").addClass("huodomll-1");
+        }else if( USER.towxid != USER.wxid && USER.iskan>0 ){
+            $(".huodomll").removeClass("huodomll-2").removeClass("huodomll-1").addClass("huodomll-3");
+        }else if(USER.towxid != USER.wxid && USER.iskan==0){
+            $(".huodomll").removeClass("huodomll-3").removeClass("huodomll-1").addClass("huodomll-2");
+        }
+
+
+
+
+    }
+	function  setJiage(discount){
+		//USER.discount
+		$(".mian_ulx2_1 .lx2 p").text(  ( (USER.tosource/priceType[2]*priceType[0]) + discount/priceType[2]*priceType[0]).toFixed(1)  );
+		$(".mian_ulx2_1 .lx3 p").text(  ( priceType[0]- (USER.tosource/priceType[2]*priceType[0]   ) - discount/priceType[2]*priceType[0] ).toFixed(1) );
+
+		$(".mian_ulx2_2 .lx2 p").text( (  (USER.tosource/priceType[2]*priceType[1])  +discount/priceType[2]*priceType[1] ) .toFixed(1) );
+		$(".mian_ulx2_2 .lx3 p").text( (  priceType[1] - (USER.tosource/priceType[2]*priceType[1]   )  -discount/priceType[2]*priceType[1]).toFixed(1)  );
+
+		$(".mian_ulx2_3 .lx2 p").text( ( (USER.tosource/priceType[2]*priceType[2]) +discount/priceType[2]*priceType[2] ) .toFixed(1) );
+		$(".mian_ulx2_3 .lx3 p").text( (  priceType[2] - (USER.tosource/priceType[2]*priceType[2])  - discount/priceType[2]*priceType[2] ).toFixed(1) );
+	}
+
+	function getIskan() {
+		/*查询 助力 数据*/
+		$.post("api/dbs/select.php", {
+			fun: "notes",
+			towxid: USER.towxid
+		}, function(result) {
+			result = eval('(' + result + ')');
+			console.log(result)
+            $(".my-paihangbang").fadeIn();
+            var _html = ""
+
+            for (var i in result) {
+                _html += '<li  class="li_' + i + '"  >';
+                _html += '<div class="pic fl"><img src="' + result[i].headimage + '96" alt=""></div>';
+                _html += '<div class="text fl"><p>' + (result[i].nickname).replace(/\?{4}/g, "⭐️")+ '</p></div>';
+                _html += '<div class="text text_2 fr"><p>' + result[i].source + '<em>元</em></p>';
+                _html += '</li>';
+            }
+            $(".my-paihangbang").html(_html);
+            getBang();
+		});
+	}
+	function getBang() {
+    		/*查询 助力 数据*/
+    		$.post("api/dbs/select.php", {
+    			fun: "bangdan",
+    			towxid: USER.towxid
+    		}, function(result) {
+    			result = eval('(' + result + ')');
+                var _html = ""
+
+                for (var i in result) {
+                    _html += '<li  class="li_' + i + '"  >';
+                    _html += '<div class="pic fl"><img src="' + result[i].headimage + '96" alt=""></div>';
+                    _html += '<div class="text fl"><p>' + (result[i].nickname).replace(/\?{4}/g, "⭐️")+ '</p></div>';
+                    _html += '<div class="text text_2 fr"><p>' + result[i].source + '<em>元</em></p>';
+                    _html += '</li>';
+                }
+                $(".zong-paihangbang").html(_html);
+    		});
+    	}
+</script>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title></title>
+    <script type="text/javascript">
+        window.onload=function(){
+            var box = document.getElementById('box');
+            for(i=0;i<3;i++){
+                var _div=document.createElement("div");
+                _div.style.width="38px";
+                _div.style.height="38px";
+                _div.style.background="red";
+                _div.style.float="left";
+                _div.style.margin="30px";
+                box.appendChild(_div);
+                document.write("       ");
+                for(j=1;j<3;j++){
+                    var _div=document.createElement("div");
+                    _div.style.width="38px";
+                    _div.style.height="38px";
+                    _div.style.background="red";
+                    _div.style.float="left";
+                    _div.style.margin="30px 30px 30px 30px";
+                    box.appendChild(_div);
+//                    document.write("<br>");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>
