@@ -15,7 +15,8 @@ li .lottery-item img{width:100%;height:auto;border-radius:5px}
 header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.png) no-repeat 184px center;background-size:170px auto}
 #userHead{float:left;width:62px;height:62px;border-radius:50%;background:pink}
 #userName{float:left;margin-left:8px;padding-top:24px;color:#fff;font-size:14px}
-.opportunity{margin-top:14px;color:#fff;text-align:center;ont-size:16px}
+.opportunity{ height:22px;margin-top:14px;color:#fff;text-align:center;font-size:16px;padding-left: 30px;}
+#opportunity{ display: inline-block;width: 30px;      margin-left: 20px;  margin-right: 20px;}
 .button-box{margin:14px auto;width:322px}
 .button-box img{width:118px}
 .button-box img:last-child{margin-left:80px}
@@ -46,3 +47,5 @@ header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.p
 
     filter: gray;
 }
+.button-box{
+    display: none;}

@@ -44,7 +44,7 @@
                 headimage:"http://wx.qlogo.cn/mmopen/Q3auHgzwzM46TsQsB1a7aL2eGiaicexiavzR6VEQgvOiaEyqLefVlXZyrGtZ3t7psIEjLu9Nq2S0rn8aQbvkX1LyWws29nyeh6QvIq2dia17Zzaw/" ,
                 wxid: "WX1" ,
                 //目标用户的信息
-                towxid:"WX1",
+                towxid:"WX2",
                 tonickname : "leo",
                 toheadimage : "<?php echo $toheadimage ; ?>",
                 //        抽奖次数 ，是否分享，是否助力，是否关注
@@ -63,14 +63,16 @@
 			<p id="userName"></p>
 		</header>
 		<ul id="oul"></ul>
-		<p id="opportunity" class="opportunity"></p>
-        <div class="button-box">
-            <img src="./img/energy.png" alt="">
+		<div  class="opportunity">
+			<span id="nowWxid">你</span>还有<span id="opportunity"></span>次抽奖机会
+		</div>
+        <div class="button-box energy-draw">
+            <img class="energy" src="./img/energy.png" alt="">
             <img src="./img/luck-draw.png" alt="">
         </div>
-        <!--<div class="button-box btn-share">
+        <div class="button-box btn-share">
             <img src="./img/btn-share.png" alt="">
-        </div>-->
+        </div>
 
         <div class="winning-record">
 			<ul id="winning-record-list">
@@ -129,6 +131,15 @@
 	</script>
 	<script type="text/javascript">
 
+        //当亲啊用户与目标用户一致，不显示助力能量+我也要抽奖，否则，显示分享得能量
+        if(USER.wxid == USER.towxid){
+            $('.energy-draw').css('display','none')
+            $('.btn-share').css('display','block')
+        }else{
+            $('.energy-draw').css('display','block')
+            $('.btn-share').css('display','none')
+        }
+
 
         /**
          * 这是一个示例，比如查询总榜
@@ -138,25 +149,16 @@
                 console.log(res)
             })*/
             apiModule.user(false ,function (res) {
-                console.log(res)
                 USER.headimage = res.headimage;
                 USER.nickname = res.nickname;
-console.log(res.choujiang_count)
-                $('#opportunity').html(res.choujiang_count) ;
+                USER.choujiang_count = res.choujiang_count;
+                $('#opportunity').html(USER.choujiang_count) ;
 
             });
-            /*apiModule.zhuli(false ,function (res) {
-                console.log(res)
-            });
-            apiModule.jiangpinByWxid(false ,function (res) {
-                console.log(res)
-            })
-            apiModule.fenxiang(false ,function (res) {
-                console.log(res)
-            })*/
 
 
         });
+
 
 
 
@@ -390,9 +392,6 @@ console.log(res.choujiang_count)
                     alert('no')
                     return;
                 }
-
-
-
 		        if (click) {//click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
 		            return false;
 		        }else{
@@ -424,6 +423,18 @@ console.log(res.choujiang_count)
                 })
 
             });
+			//助力能量
+		    $('.energy').click(function(){
+		        if($(this).hasClass('gray')){
+		            return;
+				}
+                apiModule.zhuli(false ,function (res) {
+					if(!res.data){
+						$('.energy').addClass('gray')
+					}
+
+				});
+			})
 		};
 	</script>
 </body>

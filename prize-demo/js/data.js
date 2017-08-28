@@ -23,7 +23,7 @@ var apiModule = {
                 if(callback){ callback(_result.data)}
             },
             error:function(result){
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
             }
         } )
@@ -42,11 +42,11 @@ var apiModule = {
             dataType: "text",
             async:true ,
             success:function(result) {
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
             },
             error:function(result){
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
             }
         } )
@@ -88,7 +88,7 @@ var apiModule = {
             dataType : "text" ,
             async:true ,
             success:function(result) {
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
             },
             error:function(result){
@@ -112,7 +112,7 @@ var apiModule = {
             async:true ,
             success:function(result) {
 
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
             },
             error:function(result){
@@ -132,7 +132,7 @@ var apiModule = {
             dataType : "text" ,
             async:true ,
             success:function(result) {
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
 
             },
@@ -153,7 +153,7 @@ var apiModule = {
             dataType : "text" ,
             async:true ,
             success:function(result) {
-                var _result = result || {} ;
+                var _result = eval("("+result+")") || {} ;
                 if(callback){ callback(_result)}
             },
             error:function(result){
