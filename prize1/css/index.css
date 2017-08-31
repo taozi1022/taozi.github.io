@@ -39,7 +39,7 @@ header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.p
 .information .select-box .select-value{ width:100%;line-height:19px;}
 
 .information .select-box{  overflow: hidden;  background: #fff;  width:262px;  padding:0 5px;}
-.information .select-box select{  opacity:0; position: absolute;  top:0;left:0; height:21px; width:180px; border: none; line-height:19px; }
+.information .select-box select{  opacity:0; position: absolute;  top:0;left:0; height:21px; width: 100%; border: none; line-height:19px; }
 .information>p{  width:100%;  height:52px;  background: url("../img/add-info.png") no-repeat  center top; background-size:160px auto;padding-bottom:30px;  }
 #enroll{margin:8px auto;width:262px;height:38px;  background: url("../img/enroll.png") no-repeat; background-size: 262px auto;}
 .button-share{opacity: 0 }
