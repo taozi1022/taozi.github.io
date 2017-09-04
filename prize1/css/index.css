@@ -5,31 +5,42 @@ img{vertical-align:top}
 button{padding:0;border:none}
 input{padding:0;border:none;line-height:22px}
 .clearFix::after{clear:both;display:block;content:''}
-#oul{margin:152px auto 0;padding:28px 0;width:286px;height:282px}
-#oul>li{margin-bottom:12px;width:100%}
-li .lottery-item{position:relative;float:left;margin-left:7px;width:84px;height:84px}
-li .lottery-item img{width:100%;height:auto;border-radius:5px}
 .mask{position:absolute;top:0;left:0;display:none;width:100%;height:100%;background-color:rgba(252,211,4,.5)}
 #oul div.active .mask{display:block}
 .draw-instructions,.winning-record{text-align:center}
-.htmleaf-container{ position: relative;background:#49316d url(../img/bg.png) no-repeat;background-size:375px auto ; }
+.htmleaf-container{position: relative;background:#49316d;background-size:375px auto ; }
 header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.png) no-repeat 184px center;background-size:170px auto}
 #userHead{float:left;width:62px;height:62px;border-radius:50%;overflow: hidden}
 #userHead img{width: 100% ;border-radius:50%;}
 #userName{float:left;margin-left:8px;padding-top:24px;color:#fff;font-size:14px}
-.opportunity{margin-top:14px;color:#fff;text-align:center;ont-size:16px ; line-height: 16px ; height: 26px }
-.opportunity span{display: inline-block ; background: #572b00 ; padding:  5px 10px  ; margin:0 8px  }
-.button-box,.button-share{margin:14px auto;width:322px ;display: none}
-.button-box img{width:116px}
-.button-box img:last-child{margin-left:80px}
-#btn-share { width:116px;  display: block;  margin:0 auto;}
-.winning-record{margin-bottom:26px;padding-top:44px;height:300px;background:url(../img/winning-record.png) no-repeat center 6px,url(../img/record-bg.png) no-repeat center 30px;background-size:162px auto,318px auto}
+.htmleaf-container .content{ width: 346px;  margin:0 auto; padding-top:168px;  background: url("../images/prize-tips-bg.png") no-repeat;background-size: 288px 145px;background-position: 44px 21px;}
+.content .prize-cont{margin:0 auto;padding:6px 0px 4px;width:344px;height:244px;  background: #fcf8c8;  -webkit-border-radius: 6px;  -moz-border-radius: 6px;  border-radius: 6px;}
+.prize-cont>li{margin-bottom:2px;width:100%}
+
+li .lottery-item{position:relative;float:left;margin-left:9px;width:75px;height:auto}
+li .begin{position:relative;float:left;margin-left:9px;width:160px;height:auto}
+.prize-cont .lottery-item img{width:100%;height:auto;border-radius:5px}
+.button-box,.button-share{margin:22px auto 33px;width:335px ;}
+.button-box img{width:126px;  float: left;}
+.button-box img:last-child{  float: right;}
+.arrow{width: 236px;height:35px;  margin:0 auto;}
+.arrow span{  float: left;  width:22px;  height:35px;display: inline-block; background: url("../images/arrow.png") no-repeat;background-size: 22px 35px;}
+.arrow span:last-child{float: right}
+.winning-record{margin-top:81px;margin-bottom:26px;padding-top:44px;height:300px;background:url(../img/winning-record.png) no-repeat center 6px,url(../img/record-bg.png) no-repeat center 30px;background-size:162px auto,318px auto}
 .winning-record.my-winning-record{background:url(../img/my-winning-record.png) no-repeat center 6px,url(../img/record-bg.png) no-repeat center 30px;background-size:162px auto,318px auto}
 .winning-record-list{overflow:scroll;margin:0 auto;width:288px;max-height:260px}
 .winning-record-list li{padding-top:12px;height:38px;border-bottom:1px solid #ac8a65;color:#99322b;font-size:18px}
 .winning-record-list li>span{display:inline-block;margin-top:10px;width:33.3%}
 .winning-record-list li>span:first-child{float:left;margin-top:0;margin-left:4px;width:34px;height:34px; background:#eee url("") no-repeat 100% 100%   }
 .winning-record-list li>span:first-child img{width: 100% ; }
+/*
+
+
+.opportunity{margin-top:14px;color:#fff;text-align:center;ont-size:16px ; line-height: 16px ; height: 26px }
+.opportunity span{display: inline-block ; background: #572b00 ; padding:  5px 10px  ; margin:0 8px  }
+
+#btn-share { width:116px;  display: block;  margin:0 auto;}
+
 #my-winning-record{margin:0 auto;width:158px;height:38px;background:url(../img/my-winning-record.png) no-repeat center top;background-size:158px auto}
 .draw-instructions{margin:10px auto;height:342px;background:url(../img/draw-instructions.png) no-repeat center top;background-size:340px auto}
 .information{width:100%;  font-size:14px;}
@@ -49,4 +60,4 @@ header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.p
 .btn-close{  width: 30px;  height: 30px;  position: absolute;  top: 172px;  right: 30px;  }
 .componentsAlert-info{  width: 300px;  height: 40px;  font-size:26px;  line-height: 40px;  color: #cc0606;  position: absolute;  bottom: 62px;  left: 38px;  text-align: center;  }
 .btn-alert-share{  width: 100px;  height: 40px;  position: absolute;  bottom: 14px;  left: 136px;  }
-.share-tips{ display: none;  z-index: 999;position: fixed;top:0%;left: 0;width: 100%;height: 100%;background:url("../img/share-line.png") no-repeat, rgba(0,0,0,.7);  }
+.share-tips{ display: none;  z-index: 999;position: fixed;top:0%;left: 0;width: 100%;height: 100%;background:url("../img/share-line.png") no-repeat, rgba(0,0,0,.7);  }*/
