@@ -52,19 +52,60 @@
         <p id="userName"></p>
     </header>
     <div class="content">
+        <!--抽奖区域-->
         <ul id="oul" class="prize-cont"></ul>
+        <!--按钮-->
         <div class="button-box button-zhuli clearFix">
             <img id="btn-zhuli" src="./images/energy.png" alt="">
             <img id="btn-restart" src="./images/luck-draw.png" alt="">
         </div>
+        <!--箭头-->
         <p class="arrow">
             <span></span>
             <span></span>
         </p>
-
+        <!--中奖纪录-->
         <div class="winning-record">
             <ul  class="winning-record-list" id="winning-record-list"></ul>
         </div>
+        <!--我的中奖纪录-->
+        <div class="winning-record my-winning-record">
+            <ul class="winning-record-list" id="my-winning-record-list"></ul>
+        </div>
+        <p class="rules"></p>
+        <div class="information">
+            <div>
+                <input id="name" class="name" type="text" placeholder="姓名（必填）" value="">
+                <input class="mobile" maxlength="11" type="tel"  placeholder="电话（必填）"  value="">
+                <div class="select-box">
+                    <p class="select-value">校区（必填）</p>
+                    <select class='place'  name="" id="">
+                        <option value="后海校区">后海校区</option>
+                        <option value="蛇口校区">蛇口校区</option>
+                        <option value="科技园校区">科技园校区</option>
+                        <option value="百花校区">百花校区</option>
+                        <option value="东海校区">东海校区</option>
+                        <option value="梅林校区">梅林校区</option>
+                    </select>
+                </div>
+
+                <input class="age" type="tel" placeholder="年龄（必填）" value="">
+                <p id="enroll"></p>
+            </div>
+            <p></p>
+        </div>
+
+        <div class=" jieshi"></div>
+
+
+        <div id="componentsAlert">
+            <p class="btn-close"></p>
+            <p class="componentsAlert-info">xxxxxxxxxx</p>
+            <p class="btn-alert-share"></p>
+        </div>
+
+        <p class="share-tips"></p>
+
     </div>
     <!--
 
@@ -75,9 +116,7 @@
 
 
 
-    <div class="winning-record my-winning-record">
-        <ul class="winning-record-list" id="my-winning-record-list"></ul>
-    </div>
+
 
 
     <p class="draw-instructions"></p>
@@ -279,7 +318,7 @@
                     console.log(n,i,m)
                     if(n == 1 && i == 1 || n == 1 && i == 2 ){
                         if(i == 1){
-                            html += '<a href="#" class="lottery-item begin"><img src="images/11.png"></a>';
+                            html += '<a href="#" class="lottery-item begin"><img src="images/11.png"><span>99</span></a>';
                         }
                     }else{
                         html+= '<div class="lottery-item lottery-item-'+arr[m].nowIndex+'"><img src="images/'+arr[m].showCont+'.png"><p class="mask"></p></div>';
@@ -389,7 +428,7 @@
                 })
                 //当前机会-1
                 USER.choujiang_count--;
-                $('#opportunity span').text( parseInt($('#opportunity span').text())-1 ) ;
+                $('.begin span').text( parseInt($('.begin span').text())-1 ) ;
 
                 lottery.speed=100;
                 roll(k);    //转圈过程不响应click事件，会将click置为false
