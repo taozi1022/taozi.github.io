@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>幸运抽奖</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/index.css?ehwkcn">
     <script>
         ;(function(){
             //缩放比例
@@ -34,6 +34,7 @@
                 toheadimage : "http://lingmaojia.cn/logo.jpg" ,
                 //        抽奖次数 ，是否分享，是否助力，是否关注
                 choujiang_count : '99',
+                userinfo:false,
                 isshare : '<?php echo $isshare ; ?>',
                 iszhuli : '<?php echo $iszhuli ; ?>',
                 iscare : '<?php echo $iscare ; ?>',
@@ -106,6 +107,8 @@
 
 <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 <script src="./js/data.js"></script>
+<SCRIPT src="js/scrolltext.js"></SCRIPT>
+
 <script>
     <!--数据初始化-->
 
@@ -160,6 +163,10 @@
         if(USER.iszhuli){
             $("#btn-zhuli").addClass("gray");
         }
+        if(USER.userinfo){
+            $(".information>div").hide();
+
+        }
 
         $('#opportunity').html(USER.curentuser + "当前还有<span>"+USER.choujiang_count+"</span>次抽奖机会") ;
         apiModule.zongbang(false ,function (res) {
@@ -173,6 +180,9 @@
                     </li>"
                 }
                 $("#winning-record-list").html(html)
+
+                var scroll2 = new ScrollText("winning-record-list",true,true,true,70,true);
+
             }
         });
         apiModule.jiangpinByWxid(false ,function (res) {
@@ -338,36 +348,6 @@
         return false;
     };
 
-    (function($){
-        $.fn.extend({
-            RollTitle: function(opt){
-                if(!opt) var opt={};
-                var _this = this;
-                _this.timer = null;
-                _this.lineH = _this.find("p:first").height();
-                _this.line=opt.line?parseInt(opt.line,15):parseInt(_this.height()/_this.lineH,10);
-                _this.speed=opt.speed,
-                _this.timespan=opt.timespan;
-                if(_this.line==0) this.line=1;
-
-                _this.scrollUp=function(){
-                    _this.animate({
-                        marginTop:0
-                    },_this.speed,function(){
-                        for(i=1;i<=_this.line;i++){
-                            _this.find("li:first").appendTo(_this);
-                        }
-                        _this.css({marginTop:0});
-                    });
-                }
-                _this.hover(function(){
-                    clearInterval(_this.timer);
-                },function(){
-                    _this.timer=setInterval(function(){_this.scrollUp();},_this.timespan);
-                }).mouseout();
-            }
-        })
-    })(jQuery);
 
     var click=false, k ;
     window.onload = function(){
@@ -437,10 +417,7 @@
             $('.select-value').html($('select option:selected').val())
         }
 
-        $(document.body).ready(function(){
-            $("#winning-record-list").RollTitle({line:1,speed:800,timespan:1});
-            $("#my-winning-record-list").RollTitle({line:1,speed:800,timespan:1});
-        });
+
 
 
     };

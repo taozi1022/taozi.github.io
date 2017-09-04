@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>幸运抽奖</title>
+    <link rel="stylesheet" href="./css/index.css?ehwkcn">
+    <script>
+        ;(function(){
+            //缩放比例
+            var defaultW = 375 ;
+            if(/Android/.test(navigator.userAgent)){
+                var version=parseFloat(RegExp.$1);
+                if(version>2.3){
+                    var phoneScale=parseInt(window.screen.width)/defaultW;
+                    document.write('<meta name="viewport" content="width='+defaultW+'", minimum-scale = '+phoneScale+", maximum-scale = "+phoneScale+', target-densitydpi=device-dpi">')
+                }else{
+                    document.write('<meta name="viewport" content="width='+defaultW+'">')
+                }
+            }else{
+                document.write('<meta name="viewport" content="width='+defaultW+', user-scalable=no">')
+            };
+        })();
+    </script>
+</head>
+<style>
+    *{padding: 0 ; margin: 0 ;box-sizing: border-box }
+    .logo{display: block ; text-align: center ; margin: 50px 0  ;color: #6b6b6b
+    }
+    .seach{width: 500px ; position: relative ; margin: 50px auto  ; }
+    .seach .title{width: 500px ;height: 50px ;border: 1px solid #57be5c;line-height: 50px ; font-size: 0 ; }
+    .seach .title input {letter-spacing:3px ; text-align: center ;line-height: 48px ; font-size: 20px ;padding: 0 15px ;width: 380px ;border: none;background: none }
+    .seach .title  span {cursor: pointer; text-align: center ; line-height: 48px ;height: 48px ; font-size: 20px ;padding: 0 15px ;display: inline-block ;width:118px ;background: #57be5c; color: #fff ;}
+</style>
+<body>
+<h1>
+<p class="logo">
+    书戏抽奖后台核销系统
+</p>
+</h1>
+<div class="seach">
+    <p class="title">
+        <input type="text" placeholder="请输入客户兑换码"><span>查询</span>
+    </p>
+</div>
+
+
+<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+     var apiModule = {}
+     var admin = "test" ;
+
+
+     function seachuser() {
+         //给用户增加次数
+         apiModule.addchoujiangcount(false ,function (res) {
+
+         });
+     }
+
+     function addchoujiangcount() {
+         //给用户增加次数
+         apiModule.addchoujiangcount(false ,function (res) {
+
+         });
+     }
+
+     function addchoujiangcount() {
+         //给用户增加次数
+         apiModule.addchoujiangcount(false ,function (res) {
+
+         });
+     }
+
+    apiModule = {
+        ///*帮助他*/
+        addchoujiangcount : function  (param,callback){
+            param = param ||  {
+                    admin :admin,
+                    towxid :window.USER.towxid,
+                }
+            $.ajax( {
+                url :host+ "/api/?f=addchoujiangcount" ,
+                data :param ,
+                type : "POST" ,
+                dataType: "text",
+                async:true ,
+                success:function(result) {
+                    var _result = eval("("+result+")") || {} ;
+                    if(callback){ callback(_result.data)}
+                },
+                error:function(result){
+                    var _result = result || {} ;
+                    if(callback){ callback(_result)}
+                }
+            } )
+
+        },
+    }
+</script>
+</body>
+</html>

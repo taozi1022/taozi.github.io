@@ -23,10 +23,12 @@ $signPackage = $jssdk->GetSignPackage();
      $wxid= $WXoppenid ;
      $iscare = false  ;
      $iszhuli = false  ;
+     $userinfo = false ;
      $isshare = false  ;
      $choujiang_count = 0 ;
      $tonickname = $nickname;
      $toheadimage = $headimage ;
+
 
  	 $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
      if( empty( $_GET["towxid"] )  ){
@@ -55,7 +57,7 @@ $signPackage = $jssdk->GetSignPackage();
 		tonickname : "<?php echo $tonickname ; ?>",
 		toheadimage : "<?php echo $toheadimage ; ?>",
         //抽奖次数 ，是否分享，是否助力，是否关注
-        userinfo:true,  //不需要显示提交信息部分
+        userinfo:"<?php echo $userinfo; ?>",  //不需要显示提交信息部分
         choujiang_count : '<?php echo $choujiang_count ; ?>',
         isshare : '<?php echo $isshare ; ?>',
         iszhuli :'<?php echo $iszhuli ; ?>',
