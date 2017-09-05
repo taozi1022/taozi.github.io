@@ -8,7 +8,7 @@ input{padding:0;border:none;line-height:22px}
 .mask{position:absolute;top:0;left:0;display:none;width:100%;height:100%;background-color:rgba(252,211,4,.5)}
 #oul div.active .mask{display:block}
 .draw-instructions,.winning-record{text-align:center}
-.htmleaf-container{position: relative;background:#49316d;background-size:375px auto ; }
+.htmleaf-container{position: relative;background:url("../img/bg.jpg") no-repeat #5f417b;background-size:375px auto ; }
 header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.png) no-repeat 184px center;background-size:170px auto}
 #userHead{float:left;width:62px;height:62px;border-radius:50%;overflow: hidden}
 #userHead img{width: 100% ;border-radius:50%;}
@@ -19,7 +19,7 @@ header{padding-top:2px;padding-left:3px;height:72px;background:url(../img/logo.p
 
 li .lottery-item{position:relative;float:left;margin-left:9px;width:75px;height:auto}
 li .begin{position:relative;float:left;margin-left:9px;width:160px;height:auto}
-li .begin>span{position: absolute;  top: 44px;  z-index: 100;  left: 62px;}
+li .begin>span{position: absolute;  top: 44px;  left: 62px;color: #fd0d0d;}
 .prize-cont .lottery-item img{width:100%;height:auto;border-radius:5px}
 .button-box,.button-share{margin:22px auto 33px;width:335px ;}
 .button-box img{width:126px;  float: left;}
@@ -27,13 +27,20 @@ li .begin>span{position: absolute;  top: 44px;  z-index: 100;  left: 62px;}
 .arrow{width: 236px;height:35px;  margin:0 auto;}
 .arrow span{  float: left;  width:22px;  height:35px;display: inline-block; background: url("../images/arrow.png") no-repeat;background-size: 22px 35px;}
 .arrow span:last-child{float: right}
-.winning-record{margin-top:81px;margin-bottom:26px;padding-top:44px;height:300px;background:url(../img/winning-record.png) no-repeat center 6px,url(../img/record-bg.png) no-repeat center 30px;background-size:162px auto,318px auto}
-.winning-record.my-winning-record{background:url(../img/my-winning-record.png) no-repeat center 6px,url(../img/record-bg.png) no-repeat center 30px;background-size:162px auto,318px auto}
+
+.winning-record ,.my-winning-record{position:relative;width: 320px;margin: 81px auto 30px;padding-top:34px; max-height:286px;  background: #ffedc5;background-size:162px auto,318px auto}
+.winning-record p:first-child,.my-winning-record p:first-child{  width:140px; height: 38px;  background: url("../images/winning-record-btn.png") no-repeat; background-size: 140px auto;  margin:-60px auto 22px;}
+.my-winning-record p:first-child{ background: url("../images/my-winning-record-btn.png") no-repeat; background-size: 140px auto; }
+.winning-record p:last-child,.my-winning-record p:last-child{ position: absolute;  margin-top: -2px;width:320px; height: 38px;  background: url("../images/box-bg.png") no-repeat; background-size: 320px auto; }
+.my-winning-record p:last-child{}
+.my-winning-record{margin-top:65px;margin-bottom:60px;}
 .winning-record-list{overflow:scroll;margin:0 auto;width:288px;max-height:260px}
 .winning-record-list li{padding-top:12px;height:38px;border-bottom:1px solid #ac8a65;color:#99322b;font-size:18px}
 .winning-record-list li>span{display:inline-block;margin-top:10px;width:33.3%}
 .winning-record-list li>span:first-child{float:left;margin-top:0;margin-left:4px;width:34px;height:34px; background:#eee url("") no-repeat 100% 100%   }
 .winning-record-list li>span:first-child img{width: 100% ; }
+#my-winning-record-list{  display: none;}
+/*.my-winning-record p:first-child{margin:-70px auto 30px;}*/
 
 
 .opportunity{margin-top:14px;color:#fff;text-align:center;ont-size:16px ; line-height: 16px ; height: 26px }
@@ -42,7 +49,7 @@ li .begin>span{position: absolute;  top: 44px;  z-index: 100;  left: 62px;}
 #btn-share { width:116px;  display: block;  margin:0 auto;}
 
 #my-winning-record{margin:0 auto;width:158px;height:38px;background:url(../img/my-winning-record.png) no-repeat center top;background-size:158px auto}
-.draw-instructions{margin:10px auto;height:342px;background:url(../img/draw-instructions.png) no-repeat center top;background-size:340px auto}
+.draw-instructions{margin:10px auto;height:322px;background:url(../images/draw-instructions.png) no-repeat center top;background-size:321px auto}
 .information{width:100%;  font-size:14px;}
 .information>div{  width: 274px;  margin:0 auto; overflow: hidden;  }
 .information>div>input ,.information .select-box{ position: relative; margin-bottom:5px; padding: 0 10px; width:252px;  border:1px solid #fff;  border-radius: 6px; line-height:19px; }
@@ -57,7 +64,9 @@ li .begin>span{position: absolute;  top: 44px;  z-index: 100;  left: 62px;}
 .SL{ white-space:nowrap;overflow:hidden;text-overflow:ellipsis }
 .gray {  -webkit-filter: grayscale(100%);  -moz-filter: grayscale(100%);  -o-filter: grayscale(100%);  filter: grayscale(100%);  filter: gray;  }
 #componentsAlert{  position: absolute;  top:100px;  left:0;  width:100%;  height:422px;  background: url("../img/alert-box.png") no-repeat;  background-size: 375px auto;  display: none;  }
+.appointment{ position: absolute; z-index:999; bottom:150px; left:0;  width: 100%; height:204px; background: url("../images/appointment.png") no-repeat ; background-size: 375px auto;  display: none;  }
 .btn-close{  width: 30px;  height: 30px;  position: absolute;  top: 172px;  right: 30px;  }
+.appointment .btn-close{top:4px;}
 .componentsAlert-info{  width: 300px;  height: 40px;  font-size:26px;  line-height: 40px;  color: #cc0606;  position: absolute;  bottom: 62px;  left: 38px;  text-align: center;  }
 .btn-alert-share{  width: 100px;  height: 40px;  position: absolute;  bottom: 14px;  left: 136px;  }
 .share-tips{ display: none;  z-index: 999;position: fixed;top:0%;left: 0;width: 100%;height: 100%;background:url("../img/share-line.png") no-repeat, rgba(0,0,0,.7);  }
