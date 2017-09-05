@@ -76,7 +76,12 @@
             <ul class="winning-record-list" id="my-winning-record-list"></ul>
             <p></p>
         </div>
-        <p class="draw-instructions"></p>
+        <!--<p class="draw-instructions"></p>-->
+        <div class="draw-instructions">
+            <p class="rules-btn"></p>
+            <img src="./images/rules-cont.png" alt="">
+        </div>
+
         <div class="information">
             <div>
                 <input id="name" class="name" type="text" placeholder="姓名（必填）" value="">
@@ -405,6 +410,17 @@
             })
 
         });
+
+        $('.rules-btn').on("touchend",function(){
+            if($('.draw-instructions img').css('display') == 'block'){
+                $('.draw-instructions img').css('display','none');
+                $('.draw-instructions').css('height','60px')
+            }else{
+                $('.draw-instructions img').css('display','block');
+                $('.draw-instructions').css('height','332px')
+            }
+
+        })
 
         $('.my-winning-record>p').on("touchend",function(){
             $('#my-winning-record-list').css('display','block');
