@@ -75,6 +75,21 @@
         }
 
         window.location.href = "toon://virtualcard/generateQRCode?params=" + JSON.stringify(params);
+        $.ajax({
+            type: "post",
+            data: 'params={"flagId":' + (params.flagId) + '}',
+            url: "//127.0.0.1:6780/getResult",
+            dataType: "json",
+            beforeSend:function(){
+            },
+            success: function (reg) {
+
+                alert('success')
+            },
+            error: function (e) {
+                alert("错误")
+            }
+        });
 
     }
     function paizhao(x,y){

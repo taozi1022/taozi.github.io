@@ -411,6 +411,7 @@
 
         });
 
+        //活动规则
         $('.rules-btn').on("touchend",function(){
             if($('.draw-instructions img').css('display') == 'block'){
                 $('.draw-instructions img').css('display','none');
@@ -421,10 +422,15 @@
             }
 
         })
-
+        //我的中奖纪录
         $('.my-winning-record>p').on("touchend",function(){
-            $('#my-winning-record-list').css('display','block');
+            if($('#my-winning-record-list').css('display') == 'block'){
+                $('#my-winning-record-list').css('display','none');
+            }else{
+                $('#my-winning-record-list').css('display','block');
+            }
         })
+        //弹框的关闭按钮和分享
         $('.appointment .btn-close').on("touchend",function(){
             $('.appointment').css('display','none');
         })
