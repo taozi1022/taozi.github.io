@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/mk-charts.js"></script>
+    <style>
+        .mk-charts{
+            width:780px;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        h1 {
+            font-weight: 400;
+            font-size: 22px;
+            color: #333;
+            margin:0;
+        }
+        p{
+            margin:0;
+        }
+        .prod-name sub {
+            margin-left: 10px;
+            font-size: 16px;
+            bottom: -.25em;
+            top: 0;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+        }
+
+
+        .block-info{
+            position: relative;
+            height: 100px;
+        }
+        .left-block{
+            position: absolute;
+            top: 7px;
+            left: 0;
+            height: 100px;
+            vertical-align: bottom;
+            font-size: 14px;
+            color: #666;
+        }
+        .right-block {
+            position: absolute;
+            top: 10px;
+            left: 250px;
+            height: 100px;
+            color: #919499;
+        }
+        .price {
+            display: inline-block;
+            font-size: 42px;
+        }
+        .gt{
+            color: #ff5959;
+        }
+        .price-change {
+            display: inline-block;
+        }
+        .date {
+            margin-top: 13px;
+        }
+
+        svg:not(:root) {
+            overflow: hidden;
+        }
+
+        .icon {
+             vertical-align: -.15em;
+         }
+        .icon {
+            vertical-align: -.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+
+        .right-block table {
+            table-layout: fixed;
+            max-width: 500px;
+        }
+        .right-block td {
+            font-size: 12px;
+            width: 90px;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-top: 3px;
+        }
+        .val {
+            color: #333;
+        }
+        .gt {
+            color: #ff5959;
+        }
+        .lt {
+            color: #3cbc98;
+        }
+    </style>
+</head>
+<body>
+
+<div class="mk-charts">
+    <h1 class="prod-name">欧元/美元<sub>(EURUSD)</sub></h1>
+    <div class="block-info"></div>
+    <div id="mk-charts-main"></div>
+
+</div>
+
+
+</body>
+<script src="jquery.min.js"></script>
+<script>
+    var mkChartsMain =   document.getElementById('mk-charts-main');
+    // 指定图表的配置项和数据
+    mkChartsMain = echarts.init(mkChartsMain)
+
+    //重置宽度和高度
+    mkChartsMain.resize({
+        width: '780px',
+        height: '500px'
+    })
+
+    /*var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    echartsBox.setOption(option);*/
+
+
+
+
+
+
+var base = +new Date(1968, 9, 3);
+var oneDay = 24 * 3600 * 1000;
+var date = [];
+
+var data = [Math.random() * 300];
+
+for (var i = 1; i < 100; i++) {
+    var now = new Date(base += oneDay);
+    console.log(Date.parse(new Date())/1000)
+    date.push(Date.parse(new Date())/1000+i);
+    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+}
+
+
+queryReal();
+querykline();
+
+    setInterval(function(){
+        queryReal();
+    },60000)
+
+
+
+function queryReal(){
+    $.ajax({
+        type: "GET",
+        url: "https://forexdata.wallstreetcn.com/real?en_prod_code=EURUSD&fields=prod_name,last_px,px_change,px_change_rate,high_px,low_px,open_px,preclose_px,business_amount,business_balance,market_value,turnover_ratio,dyn_pb_rate,amplitude,pe_rate,bps,hq_type_code,trade_status,bid_grp,offer_grp,business_amount_in,business_amount_out,circulation_value,securities_type,update_time,price_precision,week_52_high,week_52_low",
+        dataType: "json",
+        success: function(data){
+            var data = data.data.snapshot.EURUSD;
+            var html=`<div class="left-block">\
+                <div class="price gt">${data[1]}</div>\
+                <div class="price-change">\
+                    <p class="gt">+${data[2]}</p>\
+                    <p class="gt">+${data[3]}%</p></div>\
+                <div class="date">\
+                    <svg width="1em" height="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon" data-v-13b642d2="">\
+                        <path d="M512 0C229.232 0 0 229.232 0 512s229.232 512 512 512 512-229.232 512-512S794.768 0 512 0zm0 960C264.976 960 64 759.024 64 512S264.976 64 512 64s448 200.976 448 448-200.976 448-448 448zm246.72-346.496L531.888 510.4V225.872c0-17.68-14.336-32-32-32s-32 14.32-32 32v305.12a31.944 31.944 0 0 0 18.768 29.12l245.6 111.632a31.577 31.577 0 0 0 13.216 2.88c12.16 0 23.776-6.976 29.136-18.752 7.312-16.096.208-35.056-15.888-42.368z"></path>\
+                    </svg>交易中 ${getLocalTime(data[11])}</div>\
+            </div>\
+            <div class="right-block">\
+                <table >\
+                    <tbody>\
+                    <tr>\
+                        <td >昨收</td>\
+                        <td>今日最高</td>\
+                        <td>52周最高</td></tr>\
+                    <tr>\
+                        <td class="val">${data[6]}</td>\
+                        <td class="gt">${data[4]}</td>\
+                        <td class="val">${data[13]}</td></tr>\
+                    <tr class="sec-row">\
+                        <td>今开</td>\
+                        <td>今日最低</td>\
+                        <td>52周最低</td></tr>\
+                    <tr>\
+                        <td class="gt">${data[7]}</td>\
+                        <td class="lt">${data[5]}</td>\
+                        <td class="val">${data[14]}</td></tr>\
+                    </tbody>\
+                </table>\
+            </div>`;
+
+            $('.block-info').html(html);
+        }
+    });
+}
+
+function querykline(){
+    $.ajax({
+        type: "GET",
+        url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period=10&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count=1",
+        dataType: "json",
+        success: function(data){
+            console.log(data)
+        }
+    });
+}
+
+
+
+
+
+//格式化时间
+function getLocalTime(nS) {
+    return new Date(parseInt(nS) * 1000).toLocaleString('chinese',{hour12:false}).replace(/\//g, "-").replace(/日/g, " ");
+}
+
+
+var option = {
+    
+    //鼠标经过时显示当前的数据
+    tooltip: {
+        trigger: 'axis',
+        position: function (pt) {
+            return [pt[0], '10%'];
+        }
+    },
+
+    //直角坐标系 grid 中的 x 轴
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date.map(function(item){
+            return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
+        })
+    },
+    //直角坐标系 grid 中的 y 轴，
+    yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%']
+    },
+
+    series: [
+        {
+            name:'模拟数据',
+            type:'line',
+            smooth:false,
+            symbol: 'none',
+            sampling: 'average',
+            itemStyle: {
+                normal: {
+                    color: 'rgb(255, 70, 131)'
+                }
+            },
+
+            //背景颜色
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 158, 68)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 70, 131)'
+                    }])
+                }
+            },
+            data: data
+        }
+    ]
+};
+
+
+// 使用刚指定的配置项和数据显示图表。
+    mkChartsMain.setOption(option);
+
+</script>
+</html>
