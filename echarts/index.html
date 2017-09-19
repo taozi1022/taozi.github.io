@@ -1,147 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="./js/echarts.js"></script>
+    <script src="jquery.min.js"></script>
+
+    <style>
+        a{text-decoration:none}
+        .nav{position:relative;height:40px;background:#f6f6f6;color:#666;font-size:14px}
+        .nav a{display:inline-block;-webkit-box-sizing:border-box;box-sizing:border-box;margin-left:20px;height:40px;font-size:14px;line-height:40px}
+        .nav a.active{border-bottom:2px solid #1478f0;color:#1478f0}
+    </style>
 </head>
+
 <body>
+
+
+<div style='width:780px;'>
+    <div class="nav">
+        <a href="javascript:;" >1m</a> 
+        <a href="javascript:;" class="active" >5m</a> 
+        <a href="javascript:;" >15m</a> 
+        <a href="javascript:;" >30m</a> 
+        <a href="javascript:;" >1H</a> 
+        <a href="javascript:;" >4H</a> 
+        <a href="javascript:;"  >1D</a> 
+        <a href="javascript:;"  >1W</a> 
+        <a href="javascript:;"  >1M</a>
+    </div>
+
     <div id="main"></div>
+</div>
     
+
 </body>
-<script src="jquery.min.js"></script>
 <script>
-    var echartsBox =   document.getElementById('main');
+    var main = document.getElementById('main');
     // 指定图表的配置项和数据
-    echartsBox = echarts.init(echartsBox)
+    main = echarts.init(main)
 
     //重置宽度和高度
-     echartsBox.resize({
+    main.resize({
         width: '780px',
         height: '500px'
     })
 
-    /*var option = {
-        title: {
-            text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-            data:['销量']
-        },
-        xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
+    var base = +new Date(1900, 9, 3);
+    var oneDay = 48 * 3600 * 1000;
+    var date = [];
+    var period = parseInt(Math.random()*10,10)+5;
 
-    // 使用刚指定的配置项和数据显示图表。
-    echartsBox.setOption(option);*/
+    //var data = [Math.random() * 300];
 
+    for (var i = 1; i < 100; i++) {
+        var now = new Date(base += oneDay);
+        date.push([now.getMonth() + 1, now.getDate()].join('/'));
+        //data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+    }
 
-
-
-
-
-var base = +new Date(1968, 9, 3);
-var oneDay = 24 * 3600 * 1000;
-var date = [];
-
-var data = [Math.random() * 300];
-
-for (var i = 1; i < 100; i++) {
-    var now = new Date(base += oneDay);
-    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-}
-
-
-    $.ajax({
+    var data = [];
+   /* $.ajax({
         type: "GET",
         url: "https://forexdata.wallstreetcn.com/real?en_prod_code=EURUSD&fields=prod_name,last_px,px_change,px_change_rate,high_px,low_px,open_px,preclose_px,business_amount,business_balance,market_value,turnover_ratio,dyn_pb_rate,amplitude,pe_rate,bps,hq_type_code,trade_status,bid_grp,offer_grp,business_amount_in,business_amount_out,circulation_value,securities_type,update_time,price_precision,week_52_high,week_52_low",
         dataType: "json",
-        success: function(data){
+        success: function (data) {
             console.log(data)
         }
-    });
+    });*/
 
     $.ajax({
         type: "GET",
-        url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period=10&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count=1",
+        url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period="+8+"&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count=50",
         dataType: "json",
-        success: function(data){
-            console.log(data)
+        success: function (data) {
+            //console.log(data.data.candle.EURUSD)
+            data = splitData(data.data.candle.EURUSD)
+            // 使用刚指定的配置项和数据显示图表。        
+            mainInit(data);
+        
         }
-    });
+    }); 
 
 
-var option = {
+
+function  mainInit(datas){
+    var option = {
+        //鼠标经过时显示当前的数据
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        //标题
+        /*title: {
+            left: 'center',
+            text: '大数据量面积图',
+        },*/
+
+        //直角坐标系 grid 中的 x 轴
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: date
+        },
+        //直角坐标系 grid 中的 y 轴，
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%']
+        },
+        series: [
+            {
+                name: '显示数据',
+                type: 'line',
+                smooth: false,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(7, 235, 255)'
+                    }
+                },
+                //背景颜色
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(120, 246, 227)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 255, 255)'
+                        }])
+                    }
+                },
+                data: datas
+            }
+        ]
+    };
+    main.setOption(option);
+}
     
-    //鼠标经过时显示当前的数据
-    tooltip: {
-        trigger: 'axis',
-        position: function (pt) {
-            return [pt[0], '10%'];
+
+       
+
+
+    function splitData(rawData) {
+        var datas = [];
+        /*var times = [];
+        var vols = [];
+        var macds = []; 
+        var difs = []; 
+        var deas = [];*/
+        for (var i = 0; i < rawData.length; i++) {
+            datas.push(rawData[i]);
+            
+            /*times.push(rawData[i].splice(0, 1)[0]);
+            vols.push(rawData[i][4]);
+            macds.push(rawData[i][6]);
+            difs.push(rawData[i][7]);
+            deas.push(rawData[i][8]);*/
         }
-    },
-    //标题
-    title: {
-        left: 'center',
-        text: '大数据量面积图',
-    },
-
-    //直角坐标系 grid 中的 x 轴
-    xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: date
-    },
-    //直角坐标系 grid 中的 y 轴，
-    yAxis: {
-        type: 'value',
-        boundaryGap: [0, '100%']
-    },
-
-    series: [
-        {
-            name:'模拟数据',
-            type:'line',
-            smooth:false,
-            symbol: 'none',
-            sampling: 'average',
-            itemStyle: {
-                normal: {
-                    color: 'rgb(255, 70, 131)'
-                }
-            },
-
-            //背景颜色
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgb(255, 158, 68)'
-                    }, {
-                        offset: 1,
-                        color: 'rgb(255, 70, 131)'
-                    }])
-                }
-            },
-            data: data
-        }
-    ]
-};
-
-
-// 使用刚指定的配置项和数据显示图表。
-    echartsBox.setOption(option);
-
+        return datas;
+       /* return {
+            datas: datas,
+            times: times,
+            vols: vols,
+            macds: macds,
+            difs: difs,
+            deas: deas
+        }*/
+    }
 </script>
+
 </html>

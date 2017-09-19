@@ -56,6 +56,7 @@
             beforeSend:function(){
             },
             success: function (reg) {
+                alert(JSON.stringify(reg))
                 $("#showimg").attr("src","data:image/octet-stream;base64,"+ reg.data.base64)
             },
             error: function (e) {
