@@ -132,7 +132,8 @@
 
 </body>
 <script src="jquery.min.js"></script>
-<script>
+<script src="./js/test.js"></script>
+<!--<script>
     var mkChartsMain =   document.getElementById('mk-charts-main');
     // 指定图表的配置项和数据
     mkChartsMain = echarts.init(mkChartsMain)
@@ -142,21 +143,6 @@
         width: '780px',
         height: '500px'
     })
-
-
-
-    var base = +new Date(1968, 9, 3);
-    var oneDay = 24 * 3600 * 1000;
-    var date = [];
-
-//    var data = [Math.random() * 300];
-
-    for (var i = 1; i < 100; i++) {
-        var now = new Date(base += oneDay);
-        console.log(Date.parse(new Date())/1000)
-        date.push(Date.parse(new Date())/1000+i);
-//        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-    }
 
 
     queryReal();
@@ -224,40 +210,29 @@
             }
         });
     }
-
     function splitData(rawData) {
-            var datas = [];
-            var times = [];
-            /*var vols = [];
-            var macds = [];
-            var difs = [];
-            var deas = [];*/
-            for (var i = 0; i < rawData.length; i++) {
-                datas.push(rawData[i]);
-
-                times.push(rawData[i][0]);
-                /*vols.push(rawData[i][4]);
-                macds.push(rawData[i][6]);
-                difs.push(rawData[i][7]);
-                deas.push(rawData[i][8]);*/
-            }
-//            return datas;
-            return {
-                datas: datas,
-                times: times,
-                /*vols: vols,
-                macds: macds,
-                difs: difs,
-                deas: deas*/
-            }
+        var categoryData = [];
+        var values = [];
+        for (var i = 0; i < rawData.length; i++) {
+            categoryData.push(rawData[i][0]);
+            rawData[i][0] = i;
+            values.push(rawData[i]);
         }
+        return {
+            categoryData: categoryData,
+            values: values
+        };
+    }
 
     function renderItem(params, api) {
         var xValue = api.value(0);
         var openPoint = api.coord([xValue, api.value(1)]);
+        var highPoint = api.coord([xValue, api.value(3)]);
+
+        var lowPoint = api.coord([xValue, api.value(4)]);
         var closePoint = api.coord([xValue, api.value(2)]);
-        var lowPoint = api.coord([xValue, api.value(3)]);
-        var highPoint = api.coord([xValue, api.value(4)]);
+        var upper = api.coord([xValue, api.value(5)]);
+
         var halfWidth = api.size([1, 0])[0] * 0.35;
         var style = api.style({
             stroke: api.visual('color')
@@ -292,6 +267,7 @@
 
 
 
+
     function  mkChartsInit(datas){
         var option = {
             //鼠标经过时显示当前的数据
@@ -302,28 +278,40 @@
                     label: {
                         backgroundColor: '#6a7985'
                     }
-                }
+                },
+                /*formatter: function (param) {
+                    console.log(param)
+                    param = param[0];
+                    return [
+                         param.name + '<hr size=1 style="margin: 3px 0">',
+                        '开盘价: ' + param.data[0] + '<br/>',
+                        '最高价: ' + param.data[1] + '<br/>',
+                        '最低价: ' + param.data[2] + '<br/>',
+                        '收盘价: ' + param.data[3] + '<br/>',
+                        '涨跌额: ' + param.data[2] + '<br/>',
+                        '涨跌幅: ' + param.data[2] + '<br/>'
+                    ].join('');
+                },*/
+                backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                borderWidth: 1,
+                borderColor: 'rgb(22, 104, 255)',
+                padding: 10,
+                textStyle: {
+                    color: '#000'
+                },
+                legend: {
+                    bottom: 10,
+                    left: 'center',
+                },
             },
-            //标题
-            /*title: {
-                left: 'center',
-                text: '大数据量面积图',
-            },*/
-
             //直角坐标系 grid 中的 x 轴
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: datas.times.map(function(item){
+                data: datas.categoryData.map(function(item){
                     return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
                 })
             },
-            //直角坐标系 grid 中的 y 轴，
-            /*yAxis: {
-                type: 'value',
-                boundaryGap: [0, '100%']
-            },*/
-
             yAxis: [
                 {
                     scale: true,
@@ -332,89 +320,11 @@
                     }
                 }
             ],
-            /*series: [
-                {
-                    name: '显示数据',
-                    type: 'line',
-                    smooth: false,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(7, 235, 255)'
-                        }
-                    },
-                    //背景颜色
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(120, 246, 227)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 255, 255)'
-                            }])
-                        }
-                    },
-                    data: datas[0]
-                },
-                {
-                    name: '显示数据22',
-                    type: 'line',
-                    smooth: false,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(7, 235, 255)'
-                        }
-                    },
-                    //背景颜色
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(120, 246, 227)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 255, 255)'
-                            }])
-                        }
-                    },
-                    data: datas[1]
-                },
-                {
-                    name: '显示数据2',
-                    type: 'line',
-                    smooth: false,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(7, 235, 255)'
-                        }
-                    },
-                    //背景颜色
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(120, 246, 227)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 255, 255)'
-                            }])
-                        }
-                    },
-                    data: datas[3]
-                }
-            ]*/
-
             series: [
-                {
-                    name: 'Dow-Jones index',
+                /*{
+                    name: 'open',
                     type: 'line',
-                    dimensions: [null, 'open', 'close', 'lowest', 'highest'],
+                    dimensions: [null, 'open_px', 'high_px', 'low_px', 'close_px'],
                     itemStyle: {
                         normal: {
                             color: 'rgb(7, 235, 255)'
@@ -434,7 +344,25 @@
                     },
                     data: datas.datas.map(function(item){
                         return item[1]
-                    })
+                    }),
+                    renderItem: renderItem,
+                    encode: {
+                        x: 0,
+                        y: [1, 2, 3, 4],
+                        tooltip: [1, 2, 3, 4,5]
+                    },
+                },*/
+                {
+                    name: 'Dow-Jones index',
+                    type: 'line',
+                    renderItem: renderItem,
+                    dimensions: [null, '开盘价', '最高价', '最低价', '收盘价','涨跌额','涨跌幅'],
+                    encode: {
+                        x: 0,
+                        y: [1, 2, 3, 4,5,6],
+                        tooltip: [1, 2, 3, 4,5,6]
+                    },
+                    data: datas.values
                 }
             ]
         };
@@ -447,5 +375,5 @@
         return new Date(parseInt(nS) * 1000).toLocaleString('chinese',{hour12:false}).replace(/\//g, "-").replace(/日/g, " ");
     }
 
-</script>
+</script>-->
 </html>
