@@ -102,6 +102,11 @@
         .lt {
             color: #3cbc98;
         }
+
+         a{text-decoration:none}
+        .nav{position:relative;height:40px;background:#f6f6f6;color:#666;font-size:14px}
+        .nav a{display:inline-block;-webkit-box-sizing:border-box;box-sizing:border-box;margin-left:20px;height:40px;font-size:14px;line-height:40px}
+        .nav a.active{border-bottom:2px solid #1478f0;color:#1478f0}
     </style>
 </head>
 <body>
@@ -109,6 +114,17 @@
 <div class="mk-charts">
     <h1 class="prod-name">欧元/美元<sub>(EURUSD)</sub></h1>
     <div class="block-info"></div>
+    <div class="nav">
+        <a href="javascript:;" >1m</a> 
+        <a href="javascript:;" class="active" >5m</a> 
+        <a href="javascript:;" >15m</a> 
+        <a href="javascript:;" >30m</a> 
+        <a href="javascript:;" >1H</a> 
+        <a href="javascript:;" >4H</a> 
+        <a href="javascript:;"  >1D</a> 
+        <a href="javascript:;"  >1W</a> 
+        <a href="javascript:;"  >1M</a>
+    </div>
     <div id="mk-charts-main"></div>
 
 </div>
@@ -228,13 +244,102 @@ function querykline(){
         url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period=10&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count=1",
         dataType: "json",
         success: function(data){
-            console.log(data)
+            data = splitData(data.data.candle.EURUSD)
+            // 使用刚指定的配置项和数据显示图表。        
+            mkChartsInit(data);
         }
     });
 }
 
+function splitData(rawData) {
+        var datas = [];
+        /*var times = [];
+        var vols = [];
+        var macds = []; 
+        var difs = []; 
+        var deas = [];*/
+        for (var i = 0; i < rawData.length; i++) {
+            datas.push(rawData[i]);
+            
+            /*times.push(rawData[i].splice(0, 1)[0]);
+            vols.push(rawData[i][4]);
+            macds.push(rawData[i][6]);
+            difs.push(rawData[i][7]);
+            deas.push(rawData[i][8]);*/
+        }
+        return datas;
+       /* return {
+            datas: datas,
+            times: times,
+            vols: vols,
+            macds: macds,
+            difs: difs,
+            deas: deas
+        }*/
+    }
 
 
+function  mkChartsInit(datas){
+    var option = {
+        //鼠标经过时显示当前的数据
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        //标题
+        /*title: {
+            left: 'center',
+            text: '大数据量面积图',
+        },*/
+
+        //直角坐标系 grid 中的 x 轴
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: date.map(function(item){
+            return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
+        })
+        },
+        //直角坐标系 grid 中的 y 轴，
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%']
+        },
+        series: [
+            {
+                name: '显示数据',
+                type: 'line',
+                smooth: false,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(7, 235, 255)'
+                    }
+                },
+                //背景颜色
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(120, 246, 227)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 255, 255)'
+                        }])
+                    }
+                },
+                data: datas
+            }
+        ]
+    };
+    mkChartsMain.setOption(option);
+}
 
 
 //格式化时间
@@ -243,7 +348,7 @@ function getLocalTime(nS) {
 }
 
 
-var option = {
+/*var option = {
     
     //鼠标经过时显示当前的数据
     tooltip: {
@@ -300,6 +405,6 @@ var option = {
 
 // 使用刚指定的配置项和数据显示图表。
     mkChartsMain.setOption(option);
-
+*/
 </script>
 </html>
