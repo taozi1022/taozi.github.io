@@ -1,4 +1,6 @@
-var mkChartsMain =   document.getElementById('mk-charts-main'),mkChartsData;
+var mkChartsMain =   document.getElementById('mk-charts-main'),mkChartsData,queryRealTimer,queryklineTimer,candlePeriod;
+var aList = document.getElementsByClassName('nav')[0].getElementsByTagName('a');
+
 // 指定图表的配置项和数据
 mkChartsMain = echarts.init(mkChartsMain)
 
@@ -7,14 +9,6 @@ mkChartsMain.resize({
     width: '780px',
     height: '500px'
 })
-
-
-queryReal();
-querykline(256);
-
-setInterval(function(){
-    queryReal();
-},60000)
 
 
 function queryReal(){
@@ -62,19 +56,19 @@ function queryReal(){
     });
 }
 
-function querykline(number){
+function querykline(dataCount,candlePeriod){
     $.ajax({
         type: "GET",
-        url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period=10&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count="+number,
+        url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period="+candlePeriod+"&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count="+dataCount,
         dataType: "json",
         success: function(data){
-            if(number == 1){
+            if(dataCount == 1){
                 mkChartsData.values.shift();
                 mkChartsData.categoryData.shift();
                 mkChartsData.values.push(splitData(data.data.candle.EURUSD).values[0]);
                 mkChartsData.categoryData.push(splitData(data.data.candle.EURUSD).categoryData[0]);
                 console.log(mkChartsData)
-                /*mkChartsMain.setOption({
+                mkChartsMain.setOption({
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
@@ -85,14 +79,13 @@ function querykline(number){
                     series: [{
                         data: mkChartsData.values
                     }]
-                });*/
+                });
                 mkChartsInit(mkChartsData);
             }else{
                 mkChartsData = splitData(data.data.candle.EURUSD)   
                 // 使用刚指定的配置项和数据显示图表。
                 mkChartsInit(mkChartsData);
             }
-            
         }
     });
 }
@@ -197,7 +190,7 @@ function  mkChartsInit(datas){
         ],
         series: [
             {
-                name: 'Dow-Jones index',
+                name: '',
                 type: 'line',
                 //renderItem: renderItem,
                 dimensions: [null, '开盘价', '最高价', '最低价', '收盘价','涨跌额','涨跌幅'],
@@ -206,7 +199,7 @@ function  mkChartsInit(datas){
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(7, 235, 255)'
+                        color: 'rgb(7, 235, 255)',
                     }
                 },
                 //背景颜色
@@ -233,6 +226,52 @@ function getLocalTime(nS) {
     return new Date(parseInt(nS) * 1000).toLocaleString('chinese',{hour12:false}).replace(/\//g, "-").replace(/日/g, " ");
 }
 
-setInterval(function () {
-    querykline(1)
-}, 5000);
+
+queryReal();
+querykline(256,1);
+
+queryRealTimer = setInterval(function(){
+    queryReal();
+},60000)
+
+queryklineTimer = setInterval(function () {
+    for(var j = 0; j< aList.length; j ++ ){
+        if($(aList[j]).hasClass('active')){
+            candlePeriod = $(aList[j]).attr("data-candlePeriod");
+        }
+    }
+    querykline(1,candlePeriod)
+}, 60000);
+
+
+//tab点击事件
+
+for(var i = 0; i< aList.length; i ++ ){
+    aList[i].index = i;
+    $(aList[i]).click(function(){
+        //清除定时器
+        // clearInterval(queryRealTimer)
+        // clearInterval(queryklineTimer)
+
+        if($(this).hasClass('active')){
+            return;
+        }
+        for(var j = 0; j< aList.length; j ++ ){
+            $(aList[j]).removeClass('active')
+        }
+        $(this).addClass('active');
+        candlePeriod = $(this).attr("data-candlePeriod");
+
+        mkChartsMain.clear();
+
+        querykline(256,candlePeriod);
+
+    })
+}
+
+
+
+
+
+
+
