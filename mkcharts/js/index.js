@@ -199,7 +199,11 @@ function  mkChartsInit(datas){
                 scale: true,
                 splitArea: {
                     show: false
-                }
+                },
+                axisLabel: {
+                    inside: true,
+                    formatter: '{value}\n'
+                },
             }
         ],
         series: [
