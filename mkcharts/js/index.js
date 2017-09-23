@@ -1,5 +1,6 @@
 var mkChartsMain =   document.getElementById('mk-charts-main'),mkChartsData,queryRealTimer,queryklineTimer,candlePeriod;
 var aList = document.getElementsByClassName('nav')[0].getElementsByTagName('a');
+var shapeList = document.getElementsByClassName('shape');
 
 // 指定图表的配置项和数据
 mkChartsMain = echarts.init(mkChartsMain)
@@ -19,9 +20,9 @@ if(window.innerWidth <= 375 ){
         width: '375px',
         height: '220px'
     })
-    querykline(128,1);
+    querykline(128,1,'line');
 }else{
-    querykline(256,1);
+    querykline(256,1,'line');
 }
 
 
@@ -70,7 +71,7 @@ function queryReal(){
     });
 }
 
-function querykline(dataCount,candlePeriod){
+function querykline(dataCount,candlePeriod,showType){
     $.ajax({
         type: "GET",
         url: "https://forexdata.wallstreetcn.com/kline?prod_code=EURUSD&candle_period="+candlePeriod+"&fields=time_stamp,open_px,close_px,high_px,low_px,ma5,ma10,ma20,ma60,upper,mid,lower,diff,dea,macd,k,d,j,rsi6,rsi12,rsi24&data_count="+dataCount,
@@ -81,8 +82,7 @@ function querykline(dataCount,candlePeriod){
                 mkChartsData.categoryData.shift();
                 mkChartsData.values.push(splitData(data.data.candle.EURUSD).values[0]);
                 mkChartsData.categoryData.push(splitData(data.data.candle.EURUSD).categoryData[0]);
-                console.log(mkChartsData)
-                mkChartsMain.setOption({
+                /*mkChartsMain.setOption({
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
@@ -93,12 +93,13 @@ function querykline(dataCount,candlePeriod){
                     series: [{
                         data: mkChartsData.values
                     }]
-                });
-                mkChartsInit(mkChartsData);
+                });*/
+                mkChartsInit(mkChartsData,showType);
             }else{
-                mkChartsData = splitData(data.data.candle.EURUSD)   
+                mkChartsData = splitData(data.data.candle.EURUSD)
                 // 使用刚指定的配置项和数据显示图表。
-                mkChartsInit(mkChartsData);
+                mkChartsInit(mkChartsData,showType);
+
             }
         }
     });
@@ -159,83 +160,178 @@ function renderItem(params, api) {
 }
 
 //图标入参
-function  mkChartsInit(datas){
-    var option = {
-        //鼠标经过时显示当前的数据
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#6a7985'
-                }
+function  mkChartsInit(datas,showType){
+    var option = {};
+    //折线图
+    if(showType == 'line'){
+        option = {
+            //鼠标经过时显示当前的数据
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                },
+                backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                borderWidth: 1,
+                borderColor: 'rgb(22, 104, 255)',
+                padding: 10,
+                textStyle: {
+                    color: '#000'
+                },
+                legend: {
+                    bottom: 10,
+                    left: 'center',
+                },
             },
-            backgroundColor: 'rgba(245, 245, 245, 0.8)',
-            borderWidth: 1,
-            borderColor: 'rgb(22, 104, 255)',
-            padding: 10,
-            textStyle: {
-                color: '#000'
-            },
-            legend: {
-                bottom: 10,
-                left: 'center',
-            },
-        },
-        //直角坐标系 grid 中的 x 轴
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: datas.categoryData.map(function(item){
-                return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
-            }),
-             splitArea: {
-                show: false
-            }
-        },
-        yAxis: [
-            {
-                type: 'value',
-                scale: true,
+            //直角坐标系 grid 中的 x 轴
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: datas.categoryData.map(function(item){
+                    return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
+                }),
                 splitArea: {
                     show: false
-                },
-                axisLabel: {
-                    inside: true,
-                    formatter: '{value}\n'
-                },
-            }
-        ],
-        series: [
-            {
-                name: '',
-                type: 'line',
-                //renderItem: renderItem,
-                dimensions: [null, '开盘价', '最高价', '最低价', '收盘价','涨跌额','涨跌幅'],
-                encode: {
-                    tooltip: [1, 3, 4, 2, 5, 6]
-                },
-                itemStyle: {
-                    normal: {
-                        color: 'rgb(7, 235, 255)',
+                }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    splitArea: {
+                        show: false
+                    },
+                    axisLabel: {
+                        inside: true,
+                        formatter: '{value}\n'
+                    },
+                }
+            ],
+            series: [
+                {
+                    name: '',
+                    type: 'line',
+                    //renderItem: renderItem,
+                    dimensions: [null, '开盘价', '最高价', '最低价', '收盘价','涨跌额','涨跌幅'],
+                    encode: {
+                        tooltip: [1, 3, 4, 2, 5, 6]
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(7, 235, 255)',
+                        }
+                    },
+                    //背景颜色
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(120, 246, 227)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 255, 255)'
+                            }])
+                        }
+                    },
+                    data: datas.values
+                }
+            ]
+        };
+    }else{
+        option = {
+            //鼠标经过时显示当前的数据
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
                     }
                 },
-                //背景颜色
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(120, 246, 227)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(255, 255, 255)'
-                        }])
+                backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                borderWidth: 1,
+                borderColor: 'rgb(22, 104, 255)',
+                padding: 10,
+                textStyle: {
+                    color: '#000'
+                },
+                legend: {
+                    bottom: 10,
+                    left: 'center',
+                },
+            },
+            //直角坐标系 grid 中的 x 轴
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: datas.categoryData.map(function(item){
+                    return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
+                }),
+                splitArea: {
+                    show: false
+                }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    splitArea: {
+                        show: false
+                    },
+                    axisLabel: {
+                        inside: true,
+                        formatter: '{value}\n'
+                    },
+                }
+            ],
+            series: [
+                {
+                    type: 'candlestick',
+                    name: '日K',
+                    data: datas.values,
+                    itemStyle: {
+                        normal: {
+                            color: '#FD1050',
+                            color0: '#0CF49B',
+                            borderColor: '#FD1050',
+                            borderColor0: '#0CF49B'
+                        }
                     }
                 },
-                data: datas.values
-            }
-        ]
-    };
+                {
+                    name: '',
+                    type: 'line',
+                    //renderItem: renderItem,
+                    dimensions: [null, '开盘价', '最高价', '最低价', '收盘价','涨跌额','涨跌幅'],
+                    encode: {
+                        tooltip: [1, 3, 4, 2, 5, 6]
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(7, 235, 255)',
+                        }
+                    },
+                    //背景颜色
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(120, 246, 227)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 255, 255)'
+                            }])
+                        }
+                    },
+                    data: datas.values
+                }
+            ]
+        };
+    }
+
     mkChartsMain.setOption(option);
 }
 
@@ -285,6 +381,21 @@ for(var i = 0; i< aList.length; i ++ ){
 
     })
 }
+
+$(shapeList[0]).click(function(){
+    mkChartsMain.clear();
+    candlePeriod = $('.nav a.active')[0].dataset.candleperiod;
+    querykline(256,candlePeriod,'line');
+})
+
+$(shapeList[1]).click(function(){
+    mkChartsMain.clear();
+    candlePeriod = $('.nav a.active')[0].dataset.candleperiod;
+    querykline(256,candlePeriod,'candlestick');
+})
+
+
+
 
 
 
