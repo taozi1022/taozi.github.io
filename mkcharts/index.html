@@ -6,6 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="js/mk-charts.js"></script>
+    <script>
+        ;(function(){
+            //缩放比例
+            var defaultW = 375 ;
+            if(/Android (d+.d+)/.test(navigator.userAgent)){
+                var version=parseFloat(RegExp.$1);
+                if(version>2.3){
+                    var phoneScale=parseInt(window.screen.width)/defaultW;
+                    document.write('<meta name="viewport" content="width='+defaultW+'", minimum-scale = '+phoneScale+", maximum-scale = "+phoneScale+', target-densitydpi=device-dpi">')
+                }else{
+                    document.write('<meta name="viewport" content="width='+defaultW+'">')
+                }
+            }else{
+                document.write('<meta name="viewport" content="width='+defaultW+', user-scalable=no">')
+            };
+        })();
+    </script>
     <style>
         .mk-charts{
             width:780px;

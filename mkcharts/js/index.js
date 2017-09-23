@@ -4,11 +4,25 @@ var aList = document.getElementsByClassName('nav')[0].getElementsByTagName('a');
 // 指定图表的配置项和数据
 mkChartsMain = echarts.init(mkChartsMain)
 
+
 //重置宽度和高度
 mkChartsMain.resize({
     width: '780px',
     height: '500px'
 })
+
+queryReal();
+
+
+if(window.innerWidth <= 375 ){
+    mkChartsMain.resize({
+        width: '375px',
+        height: '220px'
+    })
+    querykline(128,1);
+}else{
+    querykline(256,1);
+}
 
 
 function queryReal(){
@@ -227,8 +241,7 @@ function getLocalTime(nS) {
 }
 
 
-queryReal();
-querykline(256,1);
+
 
 queryRealTimer = setInterval(function(){
     queryReal();
