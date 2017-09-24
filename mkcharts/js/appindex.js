@@ -46,7 +46,7 @@ function queryReal(){
                 </table>\
             </div>`;
 
-            $('.block-info').html(html);
+            $('.app-block-info').html(html);
         }
     });
 }
@@ -134,7 +134,7 @@ function  mkChartsInit(datas,showType){
                 type: 'category',
                 boundaryGap: false,
                 data: datas.categoryData.map(function(item){
-                    return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
+                    return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false}).substring(10,15)
                 }),
                 splitArea: {
                     show: false
@@ -186,7 +186,7 @@ function  mkChartsInit(datas,showType){
     }else{
 
         var dates = datas.categoryData.map(function (item) {
-            return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false});
+            return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false}).substring(10,15);
         });
 
         var data = datas.values.map(function (item) {
@@ -316,15 +316,16 @@ function getLocalTime(nS) {
 mkChartsMain = echarts.init(mkChartsMain)
 //重置宽度和高度
 mkChartsMain.resize({
-    width: '780px',
-    height: '500px'
+    width: '375px',
+    height: '300px'
 })
+
 //初始化
 candlePeriod = 1;
 dataType= 'line';
 
 queryReal();
-querykline(256,1,dataType);
+querykline(256,1,'line');
 //tab点击事件
 for(var i = 0; i< aList.length; i ++ ){
     aList[i].index = i;

@@ -24,14 +24,20 @@
         })();
     </script>
     <style>
+        body{margin:0;}
         .mk-charts{width:780px}
         table{border-collapse:collapse;border-spacing:0}
-        h1{font-weight:400;font-size:22px;color:#333;margin:0}
+        h1{font-weight:400;font-size:22px;color:#333;margin:0;    padding: 0 15px;}
         p{margin:0}
         .prod-name sub{margin-left:10px;font-size:16px;bottom:-.25em;top:0;line-height:0;position:relative;vertical-align:baseline}
-        .block-info{position:relative;height:100px}
-        .left-block{position:absolute;top:7px;left:0;height:100px;vertical-align:bottom;font-size:14px;color:#666}
-        .right-block{position:absolute;top:10px;left:250px;height:100px;color:#919499}
+        .block-info{position:relative;height:100px;    padding: 0 15px;}
+        .app-block-info{height:200px;    padding: 0 15px;}
+        .block-info .left-block{position:absolute;top:7px;left:10px;height:100px;vertical-align:bottom;font-size:14px;color:#666}
+        .block-info .right-block{position:absolute;top:10px;left:250px;height:100px;color:#919499}
+
+        .app-block-info .left-block{    position: relative;  top: 0;  left: 10px;height:100px;vertical-align:bottom;font-size:14px;color:#666;margin-bottom: 10px;}
+        .app-block-info .right-block{    position: relative;  top: 0;  left: 10px;height:100px;color:#919499;margin-bottom: 10px;}
+
         .price{display:inline-block;font-size:42px}
         .gt{color:#ff5959}
         .price-change{display:inline-block}
@@ -48,10 +54,12 @@
         a{text-decoration:none}
         .nav{position:relative;height:40px;background:#f6f6f6;color:#666;font-size:14px}
         .nav a{display:inline-block;-webkit-box-sizing:border-box;box-sizing:border-box;margin-left:20px;height:40px;font-size:14px;line-height:40px}
-        .nav p{  display: inline-block;  margin-left: 20px;}
+        .nav>span{   margin-left: 20px;}
         .nav .padding{margin-left: 20px;  border-right: 1px solid #999;}
         .nav .icon{width:18px;height:18px;}
         .nav a.active{border-bottom:2px solid #1478f0;color:#1478f0}
+        .nav>span{  display: none;}
+        .nav span.active{display: inline-block;}
     </style>
 </head>
 <body>
@@ -61,23 +69,17 @@
     <div class="block-info"></div>
     <div class="nav">
 
-        <p class="shape">
+        <span class="shape active" data-type="line">
             <svg width="1em" height="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon" data-v-13b642d2="">
                 <path d="M604.3 1024L396.56 326.248 264.757 814.47 152.77 563.264H0v-83.48h212.47l31.321 70.312L392.214 0 603.66 709.897 758.476 181.66l114.8 287.768h149.446v83.48H811.146l-39.63-99.204z"></path>
             </svg>
-        </p>
+        </span>
 
-        <p class="shape">
+        <span class="shape" data-type="candlestick">
             <svg data-v-13b642d2="" width="1em" height="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon">
                 <path d="M665.536 206.973h-34.133v136.534h-51.136v409.6h51.136v134.36h34.133v-134.36H716.8v-409.6h-51.264zM119.531 275.24H85.397v136.533H34.133V684.84h51.264v102.4h34.134v-102.4h51.136V411.773H119.53zm819.072-62.514V76.193h-34.134v136.533h-51.136v580.267h51.136v102.4h34.134v-102.4h51.264V212.726zM392.597 0h-34.133v136.533H307.2V819.2h51.264V1024h34.133V819.2h51.136V136.533h-51.136z"></path>
             </svg>
-        </p>
-
-
-        <span class="padding"></span>
-
-
-
+        </span>
 
         <a href="javascript:;"  data-candlePeriod="1" class="active" >1m</a>
         <a href="javascript:;"  data-candlePeriod="2">5m</a>
@@ -95,8 +97,19 @@
 
 
 </body>
-<script src="jquery.min.js"></script>
-<!--<script src="./js/test.js"></script>-->
-<script src="./js/index.js"></script>
+<script src="js/jquery.min.js"></script>
+<script>
+    (function(){
+        if(window.innerWidth <=780){
+            document.write('<script src="js/appindex.js"><\/script>')
+            $('.mk-charts').css('width','100%')
+            $('.block-info').addClass('app-block-info');
+            $('.app-block-info').removeClass('block-info');
+            $('.nav a').css('margin-left','10px');
+        }else{
+            document.write('<script src="js/index.js"><\/script>')
+        }
+    })();
+</script>
 
 </html>
