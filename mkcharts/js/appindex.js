@@ -1,9 +1,10 @@
 var mkChartsMain =   document.getElementById('mk-charts-main'),mkChartsData,queryRealTimer,queryklineTimer,candlePeriod,dataType;
 var aList = document.getElementsByClassName('nav')[0].getElementsByTagName('a');
+//均线&boll
+var inputList = document.getElementsByClassName('main-indicator-selector')[0].getElementsByTagName('input');
 var shapeList = document.getElementsByClassName('shape');
 var maLineColor = ['#ec63a7', '#f5cc65', '#1e88e5'];
 var upAndDownstyle = ['gt','lt'];
-
 
 
 
@@ -70,26 +71,38 @@ function splitData(rawData) {
     var categoryData = [];
     var values = [];
     var volumes = [];
+    var upper = [];
+    var mid = [];
+    var lower = [];
     var dataMA5 = [];
     var dataMA10 = [];
     var dataMA20 = [];
+    var dataMA60 = [];
 
     for (var i = 0; i < rawData.length; i++) {
         categoryData.push(rawData[i][0]);
         rawData[i][0] = i;
         values.push(rawData[i]);
         volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
+        upper.push(rawData[i][5])
+        mid.push(rawData[i][6])
+        lower.push(rawData[i][7])
         dataMA5.push(rawData[i][17])
         dataMA10.push(rawData[i][18])
         dataMA20.push(rawData[i][19])
+        dataMA60.push(rawData[i][20])
     }
     return {
         categoryData: categoryData,
         values: values,
         volumes: volumes,
+        upper:upper,
+        mid:mid,
+        lower:lower,
         dataMA5:dataMA5,
         dataMA10:dataMA10,
-        dataMA20:dataMA20
+        dataMA20:dataMA20,
+        dataMA60:dataMA60
     };
 }
 
@@ -126,7 +139,7 @@ function  mkChartsInit(datas,showType){
                     var kd    = params[0].data;
                     var rate = (kd[2]-kd[1]).toFixed(4);
                     var priceFluctuation = (rate/kd[1] * 100).toFixed(2);
-                    var html  = `${new Date(parseInt(time) * 1000).toLocaleString('chinese',{hour12:false})}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
+                    var html  = `${time}<br>开盘价：${kd[1].toFixed(4)} <br>最高价：${kd[3].toFixed(4)}<br>最低价：${kd[1].toFixed(4)} <br>收盘价：${kd[2].toFixed(4)}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
                     return html;
                 }.bind(this)
             },
@@ -135,7 +148,7 @@ function  mkChartsInit(datas,showType){
                 type: 'category',
                 boundaryGap: false,
                 data: datas.categoryData.map(function(value){
-                    return new Date(parseInt(value) * 1000).toLocaleString('chinese',{hour12:false}).substring(5);
+                    return new Date(parseInt(value) * 1000).toLocaleString('chinese',{hour12:false});
                 }),
                 splitArea: {
                     show: false
@@ -146,12 +159,12 @@ function  mkChartsInit(datas,showType){
                 axisLabel:{
                     formatter: function (value, index) {
                         var xAxisdate = value.replace(' ','/').split('/');
-                        xAxisdate[0] = xAxisdate[0]<10 ? '0'+xAxisdate[0] : xAxisdate[0];
                         xAxisdate[1] = xAxisdate[1]<10 ? '0'+xAxisdate[1] : xAxisdate[1];
+                        xAxisdate[2] = xAxisdate[2]<10 ? '0'+xAxisdate[2] : xAxisdate[2];
                         if(candlePeriod >=7){
-                            return xAxisdate[0]+'/'+ xAxisdate[1]
+                            return xAxisdate[1]+'/'+ xAxisdate[2]
                         }else{
-                            return xAxisdate[2].substring(0,5)
+                            return xAxisdate[3].substring(0,5)
                         }
                     }
                 }
@@ -234,7 +247,7 @@ function  mkChartsInit(datas,showType){
                     var kd    = params[0].data;
                     var rate = (kd[2]-kd[1]).toFixed(4);
                     var priceFluctuation = (rate/kd[1] * 100).toFixed(2);
-                    var html  = `${time}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
+                    var html  = `${time}<br>开盘价：${kd[1].toFixed(4)} <br>最高价：${kd[3].toFixed(4)}<br>最低价：${kd[1].toFixed(4)} <br>收盘价：${kd[2].toFixed(4)}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
                     return html;
                 }.bind(this)
             },
@@ -352,7 +365,10 @@ candlePeriod = 1;
 dataType= 'line';
 
 queryReal();
-querykline(256,1,'line');
+setInterval(function(){
+    queryReal();
+},10000)
+querykline(128,1,'line');
 //tab点击事件
 for(var i = 0; i< aList.length; i ++ ){
     aList[i].index = i;
@@ -364,6 +380,9 @@ for(var i = 0; i< aList.length; i ++ ){
         for(var j = 0; j< aList.length; j ++ ){
             $(aList[j]).removeClass('active')
         }
+        inputList[0].checked = true;
+        inputList[1].checked = false;
+
         $(this).addClass('active');
         candlePeriod = $(this).attr("data-candlePeriod");
         mkChartsMain.clear();
@@ -372,8 +391,10 @@ for(var i = 0; i< aList.length; i ++ ){
     })
 }
 
+
 //点击切换显示折线还是k线
 $(shapeList[0]).click(function(){
+    $('.main-indicator-selector').css('display','block');
     $(this).removeClass('active');
     $(shapeList[1]).addClass('active');
     dataType = 'candlestick';
@@ -382,13 +403,138 @@ $(shapeList[0]).click(function(){
 })
 
 $(shapeList[1]).click(function(){
+    inputList[0].checked = true;
+    inputList[1].checked = false;
+
+    $('.main-indicator-selector').css('display','none');
     $(this).removeClass('active');
     $(shapeList[0]).addClass('active');
     dataType = 'line';
     mkChartsMain.clear();
     querykline(256,candlePeriod,dataType);
 })
-
+//均线
+$(inputList[0]).click(function(){
+    var data = mkChartsData.values.map(function (item) {
+        return [+item[1], +item[2], +item[3], +item[4]];
+    });
+    $(this).attr('checked',true);
+    $(inputList[1]).attr('checked',false);
+    mkChartsMain.setOption({
+        series:[
+            {
+                type: 'candlestick',
+                name: '',
+                data: data,
+                itemStyle: {
+                    normal: {
+                        color: '#fd0015',
+                        color0: '#11f400',
+                        borderColor: '#fd0015',
+                        borderColor0: '#11f400'
+                    }
+                }
+            },{
+                name: 'MA5',
+                type: 'line',
+                data: mkChartsData.dataMA5,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1,
+                        color: maLineColor[0]
+                    }
+                }
+            }, {
+                name: 'MA10',
+                type: 'line',
+                data: mkChartsData.dataMA10,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1,
+                        color: maLineColor[1]
+                    }
+                }
+            }, {
+                name: 'MA20',
+                type: 'line',
+                data: mkChartsData.dataMA20,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1,
+                        color: maLineColor[2]
+                    }
+                }
+            }
+        ]
+    })
+})
+//boll
+$(inputList[1]).click(function(){
+    var data = mkChartsData.values.map(function (item) {
+        return [+item[1], +item[2], +item[3], +item[4]];
+    });
+    $(this).attr('checked',true);
+    $(inputList[0]).attr('checked',false);
+    mkChartsMain.setOption({
+        series:[
+            {
+                type: 'candlestick',
+                name: '',
+                data: data,
+                itemStyle: {
+                    normal: {
+                        color: '#fd0015',
+                        color0: '#11f400',
+                        borderColor: '#fd0015',
+                        borderColor0: '#11f400'
+                    }
+                }
+            }, {
+                name: 'upper',
+                type: 'line',
+                data: mkChartsData.upper,
+                smooth: false,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1,
+                        color: maLineColor[0]
+                    }
+                }
+            }, {
+                name: 'mid',
+                type: 'line',
+                data: mkChartsData.mid,
+                smooth: false,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1,
+                        color: maLineColor[1]
+                    }
+                }
+            }, {
+                name: 'lower',
+                type: 'line',
+                data: mkChartsData.lower,
+                smooth: false,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1,
+                        color: maLineColor[2]
+                    }
+                }
+            }
+        ]
+    })
+})
 
 
 
