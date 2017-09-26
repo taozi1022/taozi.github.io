@@ -256,10 +256,10 @@ function  mkChartsInit(datas,showType){
                     data: data,
                     itemStyle: {
                         normal: {
-                            color: '#fd55d3',
-                            color0: '#274af4',
-                            borderColor: '#fd55d3',
-                            borderColor0: '#274af4'
+                            color: '#fd0015',
+                            color0: '#11f400',
+                            borderColor: '#fd0015',
+                            borderColor0: '#11f400'
                         }
                     }
                 },{

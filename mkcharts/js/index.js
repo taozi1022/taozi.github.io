@@ -2,6 +2,7 @@ var mkChartsMain =   document.getElementById('mk-charts-main'),mkChartsData,quer
 var aList = document.getElementsByClassName('nav')[0].getElementsByTagName('a');
 var shapeList = document.getElementsByClassName('shape');
 var maLineColor = ['#ec63a7', '#f5cc65', '#1e88e5'];
+var upAndDownstyle = ['gt','lt'];
 
 
 
@@ -14,10 +15,10 @@ function queryReal(){
         success: function(data){
             var data = data.data.snapshot.EURUSD;
             var html=`<div class="left-block">\
-                <div class="price gt">${data[1]}</div>\
+                <div class="price ${data[2]<0?upAndDownstyle[1]:upAndDownstyle[0]}">${data[1]}</div>\
                 <div class="price-change">\
-                    <p class="gt">+${data[2]}</p>\
-                    <p class="gt">+${data[3]}%</p></div>\
+                    <p class="${data[2]<0?upAndDownstyle[1]:upAndDownstyle[0]}">${data[2]}</p>\
+                    <p class="${data[3]<0?upAndDownstyle[1]:upAndDownstyle[0]}">${data[3]}%</p></div>\
                 <div class="date">\
                     <svg width="1em" height="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon" data-v-13b642d2="">\
                         <path d="M512 0C229.232 0 0 229.232 0 512s229.232 512 512 512 512-229.232 512-512S794.768 0 512 0zm0 960C264.976 960 64 759.024 64 512S264.976 64 512 64s448 200.976 448 448-200.976 448-448 448zm246.72-346.496L531.888 510.4V225.872c0-17.68-14.336-32-32-32s-32 14.32-32 32v305.12a31.944 31.944 0 0 0 18.768 29.12l245.6 111.632a31.577 31.577 0 0 0 13.216 2.88c12.16 0 23.776-6.976 29.136-18.752 7.312-16.096.208-35.056-15.888-42.368z"></path>\
@@ -31,17 +32,17 @@ function queryReal(){
                         <td>今日最高</td>\
                         <td>52周最高</td></tr>\
                     <tr>\
-                        <td class="val">${data[6]}</td>\
-                        <td class="gt">${data[4]}</td>\
-                        <td class="val">${data[13]}</td></tr>\
+                        <td class="val">${data[6].toFixed(4)}</td>\
+                        <td class="gt">${data[4].toFixed(4)}</td>\
+                        <td class="val">${data[13].toFixed(4)}</td></tr>\
                     <tr class="sec-row">\
                         <td>今开</td>\
                         <td>今日最低</td>\
                         <td>52周最低</td></tr>\
                     <tr>\
-                        <td class="gt">${data[7]}</td>\
-                        <td class="lt">${data[5]}</td>\
-                        <td class="val">${data[14]}</td></tr>\
+                        <td class="gt">${data[7].toFixed(4)}</td>\
+                        <td class="lt">${data[5].toFixed(4)}</td>\
+                        <td class="val">${data[14].toFixed(4)}</td></tr>\
                     </tbody>\
                 </table>\
             </div>`;
@@ -122,10 +123,11 @@ function  mkChartsInit(datas,showType){
                 formatter: function(params) {
                     var time  = params[0].name;
                     var kd    = params[0].data;
-                    var rate = kd[2]-kd[1];
-                    var priceFluctuation = (rate/kd[1]).toFixed(2);
-                    rate = rate > 0 ?( '+'+rate.toFixed(4)):rate.toFixed(4);
-                    var html  = `${time}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class='rate'>涨跌额：${rate}</span><br><span class='rate'>涨跌幅：${priceFluctuation}%</span>`
+                    var rate = (kd[2]-kd[1]).toFixed(4);
+                    var priceFluctuation = (rate/kd[1] * 100).toFixed(2);
+                    // rate = rate > 0 ?( rate.toFixed(4)):rate.toFixed(4);
+                    // priceFluctuation = priceFluctuation > 0 ?( priceFluctuation.toFixed(2)):priceFluctuation.toFixed(2);
+                    var html  = `${new Date(parseInt(time) * 1000).toLocaleString('chinese',{hour12:false})}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
                     return html;
                 }.bind(this)
             },
@@ -133,11 +135,26 @@ function  mkChartsInit(datas,showType){
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: datas.categoryData.map(function(item){
-                    return new Date(parseInt(item) * 1000).toLocaleString('chinese',{hour12:false})
+                data: datas.categoryData.map(function(value){
+                    return new Date(parseInt(value) * 1000).toLocaleString('chinese',{hour12:false}).substring(5);
                 }),
                 splitArea: {
                     show: false
+                },
+                axisLine:{
+                    show:false
+                },
+                axisLabel:{
+                    formatter: function (value, index) {
+                        var xAxisdate = value.replace(' ','/').split('/');
+                        xAxisdate[0] = xAxisdate[0]<10 ? '0'+xAxisdate[0] : xAxisdate[0];
+                        xAxisdate[1] = xAxisdate[1]<10 ? '0'+xAxisdate[1] : xAxisdate[1];
+                        if(candlePeriod >=7){
+                            return xAxisdate[0]+'/'+ xAxisdate[1]
+                        }else{
+                            return xAxisdate[2].substring(0,5)
+                        }
+                    }
                 }
             },
             yAxis: [
@@ -155,7 +172,7 @@ function  mkChartsInit(datas,showType){
             ],
             dataZoom: [{
                 type: 'inside',
-                startValue: datas.categoryData.length > 100 ? datas.categoryData.length-100 : 0,
+                startValue: datas.categoryData.length>100?datas.categoryData.length-100:0,
                 endValue: datas.categoryData.length-1
             }],
             series: [
@@ -217,16 +234,29 @@ function  mkChartsInit(datas,showType){
                     var time  = params[0].name;
                     var kd    = params[0].data;
                     var rate = kd[2]-kd[1];
-                    var priceFluctuation = (rate/kd[1]).toFixed(2);
+                    var priceFluctuation = (rate/kd[1]*100).toFixed(2);
                     rate = rate > 0 ?( '+'+rate.toFixed(4)):rate.toFixed(4);
-                    var html  = `${time}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class='rate'>涨跌额：${rate}</span><br><span class='rate'>涨跌幅：${priceFluctuation}%</span>`
+                    var html  = `${time}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
                     return html;
                 }.bind(this)
             },
             xAxis: {
                 type: 'category',
                 data: dates,
-                axisLine: { lineStyle: { color: '#8392A5' } }
+                axisLine: { lineStyle: { color: '#8392A5' } },
+                axisLabel:{
+                    formatter: function (value, index) {
+                        console.log(value)
+                        var xAxisdate = value.replace(' ','/').split('/');
+                        xAxisdate[1] = xAxisdate[1]<10 ? '0'+xAxisdate[1] : xAxisdate[1];
+                        xAxisdate[2] = xAxisdate[2]<10 ? '0'+xAxisdate[2] : xAxisdate[2];
+                        if(candlePeriod >=7){
+                            return xAxisdate[1]+'/'+ xAxisdate[2]
+                        }else{
+                            return xAxisdate[3].substring(0,5)
+                        }
+                    }
+                },
             },
             yAxis:[
                 {
@@ -246,7 +276,7 @@ function  mkChartsInit(datas,showType){
             },
             dataZoom: [{
                 type: 'inside',
-                startValue: dates.length > 100 ? dates.length-100 : 0,
+                startValue: dates.length>100?dates.length-100:0,
                 endValue: dates.length-1
             }],
             series: [
@@ -256,10 +286,10 @@ function  mkChartsInit(datas,showType){
                     data: data,
                     itemStyle: {
                         normal: {
-                            color: '#fd55d3',
-                            color0: '#274af4',
-                            borderColor: '#fd55d3',
-                            borderColor0: '#274af4'
+                            color: '#fd0015',
+                            color0: '#11f400',
+                            borderColor: '#fd0015',
+                            borderColor0: '#11f400'
                         }
                     }
                 },{
@@ -324,6 +354,9 @@ candlePeriod = 1;
 dataType= 'line';
 
 queryReal();
+setInterval(function(){
+    queryReal();
+},10000)
 querykline(256,1,dataType);
 //tab点击事件
 for(var i = 0; i< aList.length; i ++ ){
