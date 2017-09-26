@@ -1,5 +1,7 @@
 var mkChartsMain =   document.getElementById('mk-charts-main'),mkChartsData,queryRealTimer,queryklineTimer,candlePeriod,dataType;
 var aList = document.getElementsByClassName('nav')[0].getElementsByTagName('a');
+//均线&boll
+var inputList = document.getElementsByClassName('main-indicator-selector')[0].getElementsByTagName('input');
 var shapeList = document.getElementsByClassName('shape');
 var maLineColor = ['#ec63a7', '#f5cc65', '#1e88e5'];
 var upAndDownstyle = ['gt','lt'];
@@ -69,6 +71,9 @@ function splitData(rawData) {
     var categoryData = [];
     var values = [];
     var volumes = [];
+    var upper = [];
+    var mid = [];
+    var lower = [];
     var dataMA5 = [];
     var dataMA10 = [];
     var dataMA20 = [];
@@ -78,6 +83,9 @@ function splitData(rawData) {
         rawData[i][0] = i;
         values.push(rawData[i]);
         volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
+        upper.push(rawData[i][5])
+        mid.push(rawData[i][6])
+        lower.push(rawData[i][7])
         dataMA5.push(rawData[i][17])
         dataMA10.push(rawData[i][18])
         dataMA20.push(rawData[i][19])
@@ -86,6 +94,9 @@ function splitData(rawData) {
         categoryData: categoryData,
         values: values,
         volumes: volumes,
+        upper:upper,
+        mid:mid,
+        lower:lower,
         dataMA5:dataMA5,
         dataMA10:dataMA10,
         dataMA20:dataMA20
@@ -125,8 +136,6 @@ function  mkChartsInit(datas,showType){
                     var kd    = params[0].data;
                     var rate = (kd[2]-kd[1]).toFixed(4);
                     var priceFluctuation = (rate/kd[1] * 100).toFixed(2);
-                    // rate = rate > 0 ?( rate.toFixed(4)):rate.toFixed(4);
-                    // priceFluctuation = priceFluctuation > 0 ?( priceFluctuation.toFixed(2)):priceFluctuation.toFixed(2);
                     var html  = `${new Date(parseInt(time) * 1000).toLocaleString('chinese',{hour12:false})}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
                     return html;
                 }.bind(this)
@@ -233,9 +242,8 @@ function  mkChartsInit(datas,showType){
                 formatter: function(params) {
                     var time  = params[0].name;
                     var kd    = params[0].data;
-                    var rate = kd[2]-kd[1];
-                    var priceFluctuation = (rate/kd[1]*100).toFixed(2);
-                    rate = rate > 0 ?( '+'+rate.toFixed(4)):rate.toFixed(4);
+                    var rate = (kd[2]-kd[1]).toFixed(4);
+                    var priceFluctuation = (rate/kd[1] * 100).toFixed(2);
                     var html  = `${time}<br>开盘价：${kd[1]} <br>最高价：${kd[3]}<br>最低价：${kd[1]} <br>收盘价：${kd[2]}<br><span class="${rate < 0? upAndDownstyle[1]:rate>0?upAndDownstyle[0] : 'rate'}">涨跌额：${rate}</span><br><span class='${priceFluctuation < 0? upAndDownstyle[1]:priceFluctuation>0?upAndDownstyle[0] : 'rate'}'>涨跌幅：${priceFluctuation}%</span>`
                     return html;
                 }.bind(this)
@@ -246,7 +254,6 @@ function  mkChartsInit(datas,showType){
                 axisLine: { lineStyle: { color: '#8392A5' } },
                 axisLabel:{
                     formatter: function (value, index) {
-                        console.log(value)
                         var xAxisdate = value.replace(' ','/').split('/');
                         xAxisdate[1] = xAxisdate[1]<10 ? '0'+xAxisdate[1] : xAxisdate[1];
                         xAxisdate[2] = xAxisdate[2]<10 ? '0'+xAxisdate[2] : xAxisdate[2];
@@ -290,6 +297,42 @@ function  mkChartsInit(datas,showType){
                             color0: '#11f400',
                             borderColor: '#fd0015',
                             borderColor0: '#11f400'
+                        }
+                    }
+                },{
+                    name: 'upper',
+                    type: 'line',
+                    data: datas.upper,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                            color: maLineColor[0]
+                        }
+                    }
+                }, {
+                    name: 'mid',
+                    type: 'line',
+                    data: datas.mid,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                            color: maLineColor[1]
+                        }
+                    }
+                }, {
+                    name: 'lower',
+                    type: 'line',
+                    data: datas.lower,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                            color: maLineColor[2]
                         }
                     }
                 },{
@@ -379,6 +422,7 @@ for(var i = 0; i< aList.length; i ++ ){
 
 //点击切换显示折线还是k线
 $(shapeList[0]).click(function(){
+    $('.main-indicator-selector').css('display','block');
     $(this).removeClass('active');
     $(shapeList[1]).addClass('active');
     dataType = 'candlestick';
@@ -387,11 +431,22 @@ $(shapeList[0]).click(function(){
 })
 
 $(shapeList[1]).click(function(){
+    $('.main-indicator-selector').css('display','none');
     $(this).removeClass('active');
     $(shapeList[0]).addClass('active');
     dataType = 'line';
     mkChartsMain.clear();
     querykline(256,candlePeriod,dataType);
+})
+//均线
+$(inputList[0]).click(function(){
+    $(this).attr('checked',true);
+    $(inputList[1]).attr('checked',false);
+})
+//boll
+$(inputList[1]).click(function(){
+    $(this).attr('checked',true);
+    $(inputList[0]).attr('checked',false);
 })
 
 
