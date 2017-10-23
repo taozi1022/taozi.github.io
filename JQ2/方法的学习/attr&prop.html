@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>attr--prop</title>
+</head>
+<body>
+    <input type="button" value="勾选" />
+	<input type="button" value="取消" />
+	<input type="button" value="状态" />
+	<input type="checkbox" />
+</body>
+<script src='../jquery.js'></script>
+<script>
+
+/*
+	使用attr的时候给checkbox加属性,
+	第一次可以,第二次加挂了
+	所以操作 checked用prop
+*/
+
+/*
+	$('input').eq(0).click(function(){
+		$('input:checkbox').attr('checked',true);
+	})
+	$('input').eq(1).click(function(){
+		$('input:checkbox').attr('checked',false);
+	})*/
+	//勾选按钮
+	$('input').eq(0).click(function(){
+		$('input:checkbox').prop('checked',true);
+	});
+
+	//取消按钮
+	$('input').eq(1).click(function(){
+		$('input:checkbox').prop('checked',false);
+	});
+
+	//获取状态按钮
+	$('input').eq(2).click(function(){
+		alert($('input:checkbox').prop('checked'))
+	})
+
+</script>
+</html>

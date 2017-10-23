@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>书籍搜索-搜索</title>
+	<style>
+	body{font-family: '宋体';}
+	input,ul,h2,p{margin:0;padding:0;}
+	img{border:none;vertical-align: top;}
+	a{text-decoration: none;color:#333;}
+	.wrap{width:960px;margin:0 auto;}
+	.text{width:300px;height:34px;border:1px solid #7c1;margin: 30px 10px 30px 50px;text-indent:5px;color:#ccc;font:14px/34px "宋体";}
+	.btn{width:100px;height:30px;padding:3px;border:1px solid #333;}
+	#detail{font:14px/20px "宋体";color:#333;text-indent: 20px;}
+	#list{padding-left:10px;}
+	.book{height:180px;padding:10px 20px;border-bottom: 1px solid #ccc;clear:both;}
+	.book h2{height:30px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:20px/30px "宋体";color:#333;margin-bottom:5px;}
+	.bookInf{zoom:1;padding-top:10px;}
+	.bookInf:after{content:"";display:block;clear:both;}
+	.pic{float:left;width:120px;height:120px;margin-right: 20px;}
+	.pic img{width:100px;height:120px;}
+	.inf{float:left;width:780px;}
+	.inf p{font-size:12px;line-height: 20px;color:#555;}
+	.inf .summary{height:110px;margin-top:5px;overflow:auto;font-size: 12px;line-height: 20px;text-indent: 2em;color:#999;}
+
+	#pages{margin:10px auto;}
+	#pages a{display:inline-block;width:38px;padding:5px 0;height:26px;margin:0 8px;border:1px solid #999;font:bold 14px/26px "宋体";color:#000;text-align: center;background:#f1f1f1;cursor: pointer;}
+	#pages .current{background:#F90;}
+	#pages .pageF,#pages .pageL{width:60px;}
+	
+	</style>
+	<script src="./src/template.js"></script>
+	<script type="text/html" id="test">
+		{{each books}}
+		<div class="book">
+			<h2>
+				<a src="_black" href="https://book.douban.com/subject/{{books[$index].id}}" target="_Blank">{{books[$index].title}}</a>
+			</h2>
+			<div class="bookInf">
+				<div class="pic">
+					<a href="https://book.douban.com/subject/{{books[$index].id}}"  target="_Blank"><img src="{{books[$index].image}}"></a>
+				</div>
+				<div class="inf">
+					<p>{{books[$index].author[0]}} / {{books[$index].publisher}} / {{books[$index].pubdate}}</p>
+					<p class="summary">{{books[$index].summary}}</p>
+				</div>
+			</div>	
+		</div>
+		{{/each books}}
+	</script>
+	<script>
+		
+
+		function init(data){
+			console.log(data)
+			var books = data.books;
+			var html = template("test",{books:books});
+			list.innerHTML = html;   			
+		}
+
+		
+		window.onload = function(){
+
+		    var len = 100;
+		    var oneList = 20;
+   			var pageNum = Math.ceil(len/oneList);
+
+			btn.onclick = function (){
+				
+				var script = document.createElement("script");
+				script.id = 'res';
+				script.src = "https://api.douban.com/v2/book/search?q="+text.value+"&callback=init&count=20&start=0";
+				document.body.appendChild(script);
+				
+				setTimeout(function(){
+				    pages.innerHTML = pageHTML();
+				    var page = pages.getElementsByTagName("a");
+				    for(var i = 0; i < page.length; i++){
+				    	page[i].index = i
+				    	page[i].onclick = function(){
+				    		for( var j = 0; j < page.length; j++ ){
+						    	page[j].className = "";
+					        }
+				    		this.className = "current";
+
+				    		window.location.hash = 'page=' + this.innerHTML;
+				    		var sc = document.getElementById("res");
+				    		document.body.removeChild(sc);
+
+				    		var script = document.createElement("script");
+							script.id = 'res';
+							script.src = "https://api.douban.com/v2/book/search?q="+text.value+"&callback=init&count=20&start="+(this.index*20);
+							document.body.appendChild(script);
+				    	}
+				    }
+				},1000)			
+			};
+
+			function pageHTML(){
+				var pageHTML = '';
+			    for( var i = 0; i < pageNum; i++ ){
+			    	if(i === 0 ){
+			    		 pageHTML += '<a class="current">'+(i+1)+'</a>';
+			    	}else{
+			    		 pageHTML += '<a>'+(i+1)+'</a>';
+			    	}
+		        }
+			    return pageHTML;
+			}
+
+		};
+
+		
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<input type="text" id="text" class="text" value="JavaScript权威指南">
+		<input type="button" id="btn" class="btn" value="搜索相关书籍">
+		<p id="detail"></p>
+	</div>
+	<hr>
+	<div id="list" class="wrap">
+		小提示：在框中输入要查询的书名，点击搜索按钮就能查询呦~
+	</div>
+	<p id="pages" class="wrap"></p>
+</body>
+</html>

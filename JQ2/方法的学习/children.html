@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>attr--prop</title>
+</head>
+<body>
+   <div id="div1">
+		<input type="button" value="勾选" />
+		<input type="button" value="勾选" />
+		<input type="text"  />
+		<input type="checkbox" value="勾选" />
+		<ul>
+			<li>
+				<ul>
+					<li>我是多层嵌套</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+<script src='../jquery.js'></script>
+<script>
+/*
+	.children()		获取到子级
+*/
+
+	console.log($('#div1').children());	//获取到所有的子级元素
+
+
+</script>
+</html>

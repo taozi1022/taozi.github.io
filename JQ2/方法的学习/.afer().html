@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>attr--prop</title>
+</head>
+<body>
+   <div id="div1">
+		<ul>
+			<li>
+				<ul>
+					<li>
+						<span>123</span>
+					</li>
+					<li>
+						<span>123</span>
+					</li>
+					<li>
+						<span>123</span>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+<script src='../jquery.js'></script>
+<script>
+/*
+	.find(selector) 查找元素
+*/
+//找到所有的span,给span加背景
+	$('#div1').find('span').css('background','pink')
+
+</script>
+</html>

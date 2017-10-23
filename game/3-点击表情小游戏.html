@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>小游戏</title>
+	<style>
+		body {
+			background: #f1f1f1;
+			font-family: 微软雅黑;
+			font-size: 16px;
+			-webkit-user-select: none;
+		}
+		
+		#box {
+			width: 800px;
+			height: 450px;
+			border: 1px solid #066;
+			background: #FFF;
+			margin: 20px auto 0;
+			position: relative;
+			top: 0;
+			left: 0;
+		}
+		
+		#fraction {
+			width: 130px;
+			border: 1px solid #066;
+			position: relative;
+			top: -1px;
+			left: -152px;
+			background: #FFC;
+			padding: 10px;
+		}
+		
+		#fraction p {
+			margin: 0;
+			font-family: 微软雅黑;
+			font-size: 16px;
+			line-height: 30px;
+		}
+		
+		#alert {
+			text-align: center;
+		}
+		#qq img{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 30px;
+			height: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="alert">
+		<h2>你的鼠标有多快？</h2>
+	 	<p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+	 	<input type="button" value="开始游戏" />
+	</div>
+	
+	<div id="box">
+		<div id="fraction">
+		  	<p>得分：0 分</p>
+		  	<p>失分：0 分</p>
+		</div>
+	  <div id="qq"></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/tools.js" ></script>
+<script type="text/javascript" src="js/MTween.js" ></script>
+<script>
+	var alert1 = $("#alert");
+	var btn = $("input",alert1)[0];
+	var box = $("#box");
+	
+	var fraction = $("#fraction");
+	var allP = $("p",fraction);
+	var qq = $("#qq");
+	
+	var width = parseInt(getStyle(box, 'width'));
+	var height = parseInt(getStyle(box, 'height'));
+	//把img存在一个数组里
+	var arr = ['1.png','2.png','3.png','4.png','5.png','6.png','7.png','8.png','9.png','10.png','11.png'];
+//	var n = Math.round(Math.random()*600)+1000;
+	var n = 2000;
+	var m = 0;
+	var num = 0;//
+	btn.disabled = false;
+	//点击按钮
+	btn.onclick = fn;
+	
+	function fn(){
+		//点击开始游戏之后,不能再点开始游戏按钮
+		btn.disabled = true;
+		var imgs = $("img"); //在btn的下面来获取img
+		//点击input的时候，让游戏开始
+		btn.value = '游戏正在进行中……'; 
+		var a = Math.round(Math.random() * (width-100) + 50); 	//随即获取left的值,设置left的值在50--750之间
+		var b = Math.floor(Math.random() * arr.length);   		//随机来取数组中的图片
+		qq.innerHTML = '<img style="left:' + a + 'px;" src="img/' + arr[b] + '" />';
+		n-=50;
+		//判断n的值,当n的时间累减到600以下时,将n的值设置为600
+		if(n<600){
+			n = 600;
+		}
+		MTween(imgs[0],{top:420},n,'linear',function(){
+			//抖动box
+			shake(box,'top',30,function(){
+				m++;  									//失去的分数+1
+				allP[1].innerHTML = '失分:'+m+'分';    	//改变失去的分数的页面结构
+				
+				//进行判断,当我失去的分数到达我设定的值的时候,提示用户游戏失败,把所有的游戏记录清空
+				if(m>=10){
+					alert('GameOver');					//提示用户,游戏结束
+					btn.value = "开始游戏";				//将按钮的value改为开始游戏
+					btn.disabled = false;				//将按钮状态切换到可点击状态
+					qq.innerHTML = '';					//清空显示表情的页面结构
+					m = 0;								//失分重置为0
+					allP[0].innerHTML = '得分:'+0+'分';	//得分重置为0
+					allP[1].innerHTML = '失分:'+m+'分';	//失分重置为0
+					
+				}else{
+					fn();//调用函数
+				}
+			})
+			
+		});
+		var onOff = true;  //定义开关给点击图片的时候判断
+		//点击imgs，给img加事件处理
+		imgs[0].onmousedown = function(){
+			//点击后,开关为假,!假即是真,再点击当前这张图片时没有任何反应
+			if(!onOff){
+				return;
+			}
+			onOff = false;							//防止狂点表情时,得分一直加
+			num++;									//每点一次,得分的num就+1
+			allP[0].innerHTML = '得分:'+num+'分'; 	//更改页面结构
+			
+			this.src = 'img/qq.png'; 				//当前被点击的那张图片变成骷髅
+			
+			clearInterval(this.timer); 				//停止当前的定时器
+			
+			shake(this,'left',30, function(){		//让当前的this抖动
+				fn(); 								//调用函数
+			})
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>attr--prop</title>
+</head>
+<body>
+   	<ul></ul>
+</body>
+<script src='../jquery.js'></script>
+<script>
+	var li = $('<li>123</li>');
+	//$('ul').append(li).css('background','pink');	//append
+	//这个背景是加给ul的
+	li.appendTo($('ul')).css('background','pink');	//appendTo
+	//这个背景是加给li的
+</script>
+</html>

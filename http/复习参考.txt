@@ -1,0 +1,68 @@
+﻿1、 ajax的工作流程？
+		1. 得到一个ajax对象                       
+		2. 连接地址，准备数据                     
+		3. 发送数据                               
+		4. 等待数据传输（数据开始传，没传完成）    
+		5. 数据传输完成 可以使用数据了            
+
+2.  function Foo(){
+	var i = 0;
+	return function(){
+		console.log(i++);
+	}
+}
+
+var f1 = Foo(),f2 = Foo();
+
+f1();
+f1();
+f2();
+
+
+
+3、 HTTP的状态码及其含义？
+
+		1xx（临时响应）:  表示临时响应并需要请求者继续执行操作的状态代码。
+		2xx（成功）   :  表示成功处理了请求的状态代码。如图 中国奥盟网 状态码检测是200.
+		3xx 重定向）   :  表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向。
+		4xx（请求错误）:  这些状态代码表示请求可能出错，妨碍了服务器的处理。
+		5xx（服务器错误）: 这些状态代码表示服务器在尝试处理请求时发生内部错误。 这些错误可能是服务器本身的错误，而不是请求出错。
+
+
+
+4、 Javascript中有哪些数据类型？
+		String	Nunber	Boolean		null	undefined	object
+
+5、 写一个方法，翻转字符串？
+		var str = "qwertyuiop";
+
+	    function fn(str){
+	    	return str.split("").reverse().join("");
+	    }
+
+	    console.log(fn(str))
+
+6、 this指向
+
+	调用方式						This指向
+
+	直接调用	(window,对象)	fn()			window 	(如果是对象调用的,this指向对象)
+	事件调用	onclick = fn;				指向事件源
+	定时器调用	setInterval(fn,30)			指向window
+	Call()调用/apply()	fn.call(第一个参数)		this指向的第一个参数
+
+
+7、 前端页面由哪三层构成？作用是什么？
+		html	结构层
+		css		表示层
+		js 		行为层
+
+8、 数组的方法
+	appendChild()		将元素添加到尾部
+	insertBefore()		将元素添加到添加的位置之前 
+	replaceChild()		替换页面结构
+	removeChild()		移除页面结构
+9 事件流的三个阶段
+	捕获,目标,冒泡
+
+

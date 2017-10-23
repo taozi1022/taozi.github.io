@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+    ul{
+        display: none;
+    }
+    li{
+    	line-height: 30px;
+    }
+    .skyblue{
+        background: skyblue;
+    }
+    .pink{
+        background: pink;
+    }
+    .bg{
+    	background: blue;
+    }
+    .red{
+    	background: red;
+    }
+    
+    
+    
+</style>
+<script src="jquery.js"></script>
+<script>
+    $(function(){
+    /*点击展开收缩*/
+        /*$('h3').click(function(){               //h3点击事件处理
+            $(this).toggleClass('red');         //给当前添加class
+            if($(this).hasClass('red')){        //有class就展开
+                $(this).next().show('normal');  //show(动画)
+            }else{                              //没有就合上
+                $(this).next().hide('normal');  //hide(动画)
+            }
+        }).mouseenter(function(){               //鼠标移入
+            $(this).addClass('skyblue');
+        }).mouseleave(function(){               //鼠标离开
+            $(this).removeClass('skyblue');
+        })*/
+
+    /*li鼠标移入移出点击*/
+        /*$('li').mouseenter(function(){          //鼠标移入
+            $(this).addClass('pink');
+        }).mouseleave(function(){               //鼠标离开
+            $(this).removeClass('pink');
+        }).click(function(){
+            $('li').removeClass('bg');          //清空li所有的背景
+            $(this).toggleClass('bg');          //给当前添加class
+        })*/
+
+
+        /*点击展开收缩*/
+        $('h3').click(function(){               //h3点击事件处理
+            $(this).toggleClass('red');         //给当前添加class
+            if($(this).hasClass('red')){        //有class就展开
+                $(this).next().show('normal');  //show(动画)
+            }else{                              //没有就合上
+                $(this).next().hide('normal');  //hide(动画)
+                $('li').removeClass('bg');          //清空li所有的背景
+            }
+        }).hover(function(){
+            $(this).addClass('pink');
+        },function(){
+            $(this).removeClass('pink');
+        })
+
+        /*鼠标移入移出点击*/
+        $('li').click(function(){
+            $('li').removeClass('bg');          //清空li所有的背景
+            $(this).toggleClass('bg');          //给当前添加class
+        }).hover(function(){
+            $(this).addClass('pink');
+        },function(){
+            $(this).removeClass('pink');
+        })
+    })
+</script>
+</head>
+<body>
+    <div id="oDiv">
+        <div>
+            <h3>QQ好友</h3>
+            <ul>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+            </ul>
+        </div>
+        <div>
+            <h3>陌生人</h3>
+            <ul>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+            </ul>
+        </div>
+        <div>
+            <h3>黑名单</h3>
+            <ul>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+                <li>陌生人1</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

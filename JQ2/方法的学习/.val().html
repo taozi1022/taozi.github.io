@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>attr--prop</title>
+</head>
+<body>
+    <input type="text" />
+</body>
+<script src='../jquery.js'></script>
+<script>
+
+/*
+	.val();
+		获取元素的value
+	.val(value)
+		给元素的value赋值
+*/
+	$(document).click(function(){
+		alert($('input').val());
+	})
+
+	$('input').click(function(ev){
+		ev.stopPropagation();
+	});
+</script>
+</html>

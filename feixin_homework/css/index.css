@@ -1,0 +1,351 @@
+body,
+p,
+dl,
+dd,
+h2{
+	margin: 0;
+}
+
+body{
+	min-width: 930px;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+img{
+	border: none;
+	vertical-align: top;
+}
+.clear{
+	zoom: 1;
+}
+.clear:after{
+	content: "";
+	display: block;
+	clear: both;
+	zoom: 1;
+}
+
+.wrap{
+	margin: 0 auto;
+}
+a:hover{
+	text-decoration: underline;
+}
+
+
+
+#header{
+	height: 31px;
+	background: url(../img/headerbg.png) repeat-x;
+}
+#header #title{
+	position: relative;
+	width: 930px;
+	height: 31px;
+}
+#header #img1{
+	float: left;
+	padding-left: 12px;
+	padding-top: 3px;
+}
+#header #img2{
+	float: left;
+	padding-top: 9px;
+}
+#header .nav{
+	float: left;
+	padding-left: 9px;
+	width: 404px;
+}
+#header .nav a{
+	vertical-align: middle;
+	font: 12px/31px "宋体";
+	color: #fff;
+}
+#header .nav #span{
+	vertical-align: middle;
+	font: 11px/31px "宋体";
+	color: #fff;
+	padding: 0 9px 0 8px;
+}
+#header #login{
+	float: left;
+	width: 101px;
+	padding-left: 154px;
+	font: 12px/31px "宋体";
+	color: #fff;
+}
+#header #login a{
+	font: 12px/31px "宋体";
+	color: #fff;
+}
+#header #enter{
+	float: left;
+	padding-left: 5px;
+}
+#header #enter a{
+	vertical-align: middle;
+	padding-right: 10px;
+	font: 12px/31px "宋体";
+	color: #fff;
+}
+
+
+
+
+
+
+
+#banner{
+	position: relative;
+	width: 100%;
+	height: 372px;
+}
+#banner  #rightBg {
+	width: 100%;
+	height: 372px;
+	background: url(../img/leftBg.png) repeat-x;
+}
+#banner #rightBg #leftBg{
+	width: 50%;
+	height: 372px;
+	background: url(../img/rightBg.png) repeat-x;
+}
+#banner #rightBg #pic{
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 372px;
+	background: url(../img/pic.png) no-repeat center 0;
+}
+#banner #download{
+	position: relative;
+	width: 930px;
+	height: 372px;
+}
+#banner #download img{
+	position: absolute;
+	left: 388px;
+	bottom: 108px;
+	width: 195px;
+	height: 53px;
+}
+#banner #download .phone{
+	position: absolute;
+	top: 215px;
+	left: 613px;
+	width: 284px;
+	font: 12px/22px arial,"宋体";
+	color: #fff;
+}
+#download .phone span{
+	color: #fbba34;
+}
+#banner #download .run{
+	position: absolute;
+	top: 298px;
+	left: 390px;
+	font: 12px/22px arial,"宋体";
+	color: #fff;
+}
+#banner #download .new{
+	position: absolute;
+	top: 298px;
+	left: 561px;
+	font: 12px/22px arial,"宋体";
+	color: #fff;
+}
+
+
+
+
+
+#divbg{
+	width: 100%;
+	height: 63px;
+	margin-top: 1px;
+	background: url(../img/divbg.png) repeat-x;
+}
+#divbg #divleftbg{
+	width: 50%;
+	height: 63px;
+	background: url(../img/divleftbg.png) repeat-x;
+}
+#divbg #img{
+	height: 63px;
+	background: url(../img/divImg.png) no-repeat center 0;
+	margin-top: -63px;
+}
+
+
+
+
+
+
+#content{
+	width: 930px;
+	height: 401px;
+	padding-top: 20px;
+	padding-bottom: 24px;
+}
+
+#content .contentLeft{
+	float: left;
+	width: 674px;
+	height: 401px;
+	background: url(../img/main.png) no-repeat 0 11px;
+}
+#content .contentLeft .biaoti{
+	font: 16px "微软雅黑";
+	padding-top: 34px;
+	padding-left: 91px;
+}
+#content dl{
+	padding-top: 16px;
+	float: right;
+	width: 411px;
+	color: #666;
+}
+#content dl dt{
+	overflow: hidden;
+	font: bold 18px/1 "宋体";
+	text-indent: 29px;
+	background: url(../img/4.jpg) no-repeat;
+}
+#content dl dd{
+	font: 12px/18px "宋体";
+}
+#content dl .dt1{
+	padding-bottom: 5px;
+}
+#content dl .dt2{
+	padding-bottom: 4px;
+}
+#content dl .dt3{
+	padding-bottom: 1px;
+}
+#content dl .dt4{
+	padding-bottom: 3px;
+}
+#content dl .dd1{
+	padding-bottom: 18px;
+}
+#content dl .dd2{
+	padding-bottom: 24px;
+}
+#content dl .dd3{
+	padding-bottom: 19px;
+}
+
+
+
+#content .contentRight{
+	float: right;
+	width: 240px;
+	height: 402px;
+}
+.contentRight h2{
+	padding-top: 29px;
+	padding-bottom: 2px;
+	text-indent: 17px;
+	font: 16px/1 "微软雅黑";
+	height: 28px;
+	background: url(../img/h2bg.png) no-repeat;
+}
+.contentRight .ulList{
+	height: 263px;
+	padding-bottom: 10px;
+	background: url(../img/ulListbg.png) no-repeat;
+}
+.contentRight .ul{
+	height: 204px;
+	padding: 14px 14px 0 18px;
+}
+.contentRight .ul li{
+	padding-top: 2px;
+	height: 23px;
+	border-bottom: 1px dotted #9d9d9d;
+}
+.contentRight .ul a{
+	padding-left: 11px;
+	font: 12px/22px "宋体";
+	color: #666;
+	background: url(../img/libg.png) no-repeat left 4px;
+}
+.contentRight .ul .Alast{
+	border: none;
+}
+.contentRight .ulList .more{
+	font: bold 14px/48px "宋体";
+	color: #386584;
+	padding:1px 0 0px 18px;
+}
+.contentRight .question{
+	position: relative;
+	width: 240px;
+	height: 69px;
+	background: url(../img/questionbg.png) no-repeat;
+}
+.contentRight .question a{
+	position: absolute;
+	left: 99px;
+	top: 37px;
+	font: 14px/18px "宋体";
+	color: #333;
+}
+
+
+
+
+
+#list{
+	width: 952px;
+	height: 226px;
+	padding-bottom: 33px;
+}
+#list li {
+	float: left;
+	padding: 9px 11px 0;
+}
+#list li img{
+	width: 210px;
+	height: 98px;
+	padding: 2px;
+	border: 1px solid #d3d2d1;
+}
+
+
+
+#footer{
+	position: relative;
+	width: 930px;
+	height: 100px;
+	border-top: 1px solid #e6e6e6;
+	background: url(../img/footerbg.png) no-repeat right 23px;
+}
+#footer .lastNav{
+	position: absolute;
+	top: 32px;
+	left: 237px;
+	
+}
+#footer .lastNav a{
+	font: bold 12px "宋体";
+	color: #919191;
+	letter-spacing: 2px;
+	padding-right: 10px;
+}
+#footer p{
+	position: absolute;
+	top: 57px;
+	left: 287px;
+	font: 12px "宋体";
+	color:#919191;
+	letter-spacing: 1px;
+}

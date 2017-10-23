@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>attr--prop</title>
+</head>
+<body>
+   <div id="div1">
+		<ul>
+			<li>
+				<ul>
+					<li>
+						<span></span>
+					</li>
+					<li>
+						<span></span>
+					</li>
+					<li>
+						<span></span>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+<script src='../jquery.js'></script>
+<script>
+/*
+	.parent([selector])
+		找父级
+	.parents([selector])
+		找祖先节点符合选择器的
+*/
+
+	console.log($('span').parent('li'));	//找到父级的li,找不到祖先级的li
+
+	console.log($('span').parents('li'));	//找到祖先级的li
+
+</script>
+</html>

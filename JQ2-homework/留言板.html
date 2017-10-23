@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>留言板</title>
+<style type="text/css">
+	li a{
+		padding-left: 20px;
+	}
+</style>
+</head>
+<body>
+    <input type="text" />
+    <input type="button" value='留言'/>
+    <ul>
+    	<li>123<a href="javascript:;">删除</a></li>
+    </ul>
+</body>
+<script src='jquery.js'></script>
+<script>
+
+
+/*------------------新元素插入到页面元素后面--------------------*/
+	/*$('input:button').click(function(){		//点击留言按钮
+		var val = $('input:text').val();	//获取到第一个输入框的值
+
+		var li = $('<li>'+val+'<a href="javascript:;">删除</a></li>');		//生成一个li
+		$('ul:first').append(li);		//插入到ul页面元素的后面
+		$('input:text').val('');		//清空输入框的值
+	})
+
+
+	/////点击删除
+	$('ul:first').on('click','a',function(){
+		var parent = $(this).parent();		//获取到删除的父级
+		parent.remove();		//移除它的父级
+	})
+
+*/
+
+
+
+/*------------------新元素插入到页面元素前面--------------------*/
+	$('input:button').click(function(){		//点击留言按钮
+		var val = $('input:text').val();	//获取到第一个输入框的值
+
+		var li = $('<li>'+val+'<a href="javascript:;">删除</a></li>');		//生成一个li
+		$('ul:first').prepend(li);		//插入到ul元素的前面
+		$('input:text').val('');		//清空输入框的值
+	})
+
+
+	/////点击删除
+	$('ul:first').on('click','a',function(){
+		var parent = $(this).parent();		//获取到删除的父级
+		parent.remove();		//移除它的父级
+	})
+</script>
+</html>
